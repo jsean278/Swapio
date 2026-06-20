@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Swapio turns unused gift cards into cash fast. Get 95% of your card value paid via PayPal, Cash App, Zelle, or bank transfer. 60+ brands accepted.">
+  <meta name="keywords" content="gift card to cash, sell gift cards, Swapio, PayPal payout, Cash App, Zelle">
+  <meta property="og:title" content="Swapio — Turn Unused Gift Cards Into Cash Fast">
+  <meta property="og:description" content="Swap unused gift cards for real cash. 95% payout, 60+ brands, paid within hours via PayPal, Cash App, Zelle, or bank transfer.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/logo.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <title>Swapio — Turn Unused Gift Cards Into Cash Fast</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'swapio-dark': '#2D467B',
+            'swapio-light': '#78A5D3',
+            'swapio-bg': '#F8FAFC',
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="text-gray-800" data-page="home">
+
+  <div id="site-header"></div>
+
+  <section class="relative overflow-hidden page-enter">
+    <div class="absolute inset-0 bg-gradient-to-b from-white to-swapio-bg pointer-events-none"></div>
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6 md:pt-16 md:pb-12 text-center">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-swapio-dark tracking-tight leading-tight max-w-4xl mx-auto">
+        Turn Unused Gift Cards Into Cash Fast
+      </h1>
+      <p class="text-base sm:text-lg md:text-xl text-gray-500 mt-4 md:mt-6 max-w-2xl mx-auto leading-relaxed px-2">
+        Swap your unused gift cards for real cash via PayPal, Cash App, Zelle, or Bank Transfer. Safe, simple, and paid quickly.
+      </p>
+    </div>
+  </section>
+
+  <section id="swap" class="pb-12 md:pb-16">
+    <div class="max-w-xl mx-auto px-4 sm:px-6">
+      <div class="swap-box p-5 sm:p-6 md:p-8">
+
+        <div id="swap-box-step1" class="swap-step swap-step-active">
+          <h2 class="text-lg sm:text-xl font-bold text-swapio-dark mb-5 sm:mb-6 text-center">Start Your Swap</h2>
+
+          <div id="swap-error" class="hidden mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg"></div>
+
+          <div class="space-y-5">
+            <div>
+              <label class="form-label" for="brand-search">Gift Card Brand</label>
+              <div class="dropdown-wrapper">
+                <input type="text" id="brand-search" class="form-input" placeholder="Search for your brand..." autocomplete="off" role="combobox" aria-expanded="false">
+                <div id="brand-list" class="dropdown-list" role="listbox"></div>
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label" for="balance-input">Card Balance</label>
+              <div class="relative">
+                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-medium">$</span>
+                <input type="number" id="balance-input" class="form-input pl-8" placeholder="15 – 500+" min="15" max="10000" step="1" inputmode="numeric">
+              </div>
+              <p class="text-xs text-gray-400 mt-1">Minimum $15 · Maximum varies by brand</p>
+            </div>
+
+            <div>
+              <label class="form-label" for="payout-search">Payout Method</label>
+              <div class="dropdown-wrapper">
+                <input type="text" id="payout-search" class="form-input" placeholder="Select payout method..." autocomplete="off" role="combobox" aria-expanded="false">
+                <div id="payout-list" class="dropdown-list" role="listbox"></div>
+              </div>
+            </div>
+
+            <button id="get-offer-btn" class="btn-primary w-full py-3.5 sm:py-4 text-base" disabled>
+              Get My Cash Offer →
+            </button>
+          </div>
+        </div>
+
+        <div id="offer-preview" class="swap-step">
+          <h2 class="text-lg sm:text-xl font-bold text-swapio-dark mb-5 sm:mb-6 text-center">Your Cash Offer</h2>
+          <div class="offer-preview space-y-4">
+            <div class="flex justify-between items-center gap-4">
+              <span class="text-gray-500 text-sm sm:text-base">Your Card</span>
+              <span id="preview-card" class="font-semibold text-swapio-dark text-sm sm:text-base text-right"></span>
+            </div>
+            <div class="border-t border-swapio-light/30"></div>
+            <div class="flex justify-between items-center gap-4">
+              <span class="text-gray-500 text-sm sm:text-base">You'll Receive</span>
+              <span id="preview-payout" class="font-bold text-base sm:text-lg text-swapio-dark text-right"></span>
+            </div>
+            <p id="preview-fee" class="text-xs text-gray-400 text-center"></p>
+          </div>
+          <button id="continue-btn" class="btn-primary w-full py-3.5 sm:py-4 text-base mt-6">
+            Continue to Submit →
+          </button>
+          <button id="back-to-swap" type="button" class="w-full text-center text-sm text-gray-500 hover:text-swapio-dark mt-3 transition-colors py-2">
+            ← Start over
+          </button>
+        </div>
+
+        <div id="swap-form-section" class="swap-step">
+          <h2 class="text-lg sm:text-xl font-bold text-swapio-dark mb-2 text-center">Submit Your Card</h2>
+          <p id="form-card-summary" class="text-sm text-gray-500 text-center mb-5 sm:mb-6"></p>
+
+          <div id="form-error" class="hidden mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg"></div>
+
+          <form id="submission-form" class="space-y-4" novalidate>
+            <div id="card-fields-container" class="space-y-4"></div>
+
+            <div class="field-wrapper">
+              <label class="form-label" for="full-name">Full Name <span class="text-red-500">*</span></label>
+              <input type="text" id="full-name" name="fullName" class="form-input" placeholder="Your full name" data-validate="required" data-error-message="Please enter your full name">
+            </div>
+
+            <div class="field-wrapper">
+              <label class="form-label" for="email">Email <span class="text-red-500">*</span></label>
+              <input type="text" id="email" name="email" class="form-input" placeholder="you@email.com" inputmode="email" autocomplete="email" data-validate="email">
+            </div>
+
+            <div>
+              <label class="form-label" for="form-payout-method">Payout Method</label>
+              <input type="text" id="form-payout-method" class="form-input form-input-selected" readonly>
+            </div>
+
+            <div id="payout-fields-container" class="space-y-4"></div>
+
+            <button type="submit" id="submit-btn" class="btn-primary w-full py-3.5 sm:py-4 text-base">
+              Submit Swap
+            </button>
+          </form>
+
+          <p class="text-xs text-gray-400 text-center mt-4">
+            By submitting, you agree to our <a href="terms.html" class="text-swapio-dark underline">Terms of Service</a>.
+          </p>
+        </div>
+
+        <div id="success-screen" class="swap-step success-screen">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-7 h-7 sm:w-8 sm:h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-bold text-swapio-dark">Swap Submitted Successfully!</h2>
+          <p class="text-gray-500 mt-3 max-w-sm mx-auto text-sm sm:text-base">
+            We'll verify your card and send your cash within hours.
+          </p>
+          <p class="text-sm text-gray-400 mt-6">Your order code</p>
+          <div id="success-order-code" class="order-code text-xl sm:text-2xl"></div>
+          <p class="text-sm text-gray-500">
+            You'll receive <span id="success-payout" class="font-semibold text-swapio-dark"></span>
+          </p>
+          <p class="text-xs text-gray-400 mt-4 px-2">Save your order code for reference.</p>
+          <button onclick="resetSwapFlow()" class="btn-secondary mt-6 sm:mt-8 w-full sm:w-auto">Start Another Swap</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div id="stats-bar"></div>
+  <div id="process-steps"></div>
+  <div id="trust-signals"></div>
+  <div id="site-footer"></div>
+
+  <script src="js/shared.js"></script>
+  <script src="js/card-requirements.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/dropdown.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

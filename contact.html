@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Swapio support for help with your gift card swap. Send us a message and we'll get back to you quickly.">
+  <meta property="og:title" content="Reach Us — Swapio">
+  <meta property="og:description" content="Get in touch with the Swapio team for swap questions, order help, or general support.">
+  <meta property="og:image" content="assets/logo.png">
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <title>Reach Us — Swapio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'swapio-dark': '#2D467B',
+            'swapio-light': '#78A5D3',
+            'swapio-bg': '#F8FAFC',
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="text-gray-800" data-page="contact">
+
+  <div id="site-header"></div>
+
+  <section class="page-hero page-enter">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-3xl md:text-4xl font-bold text-swapio-dark">Reach Us</h1>
+      <p class="text-gray-500 mt-4 max-w-xl mx-auto text-base sm:text-lg px-2">
+        Have a question about your swap? We're here to help.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-10 sm:py-16">
+    <div class="max-w-lg mx-auto px-4 sm:px-6">
+      <div class="swap-box p-5 sm:p-8">
+        <h2 class="text-xl font-bold text-swapio-dark mb-6 text-center">Send a Message</h2>
+
+        <div id="contact-error" class="hidden mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg"></div>
+
+        <form id="contact-form" class="space-y-4 transition-all duration-300" novalidate>
+          <div class="field-wrapper">
+            <label class="form-label" for="contact-name">Name</label>
+            <input type="text" id="contact-name" name="name" class="form-input" placeholder="Your name" data-validate="required" data-error-message="Please enter your name">
+          </div>
+          <div class="field-wrapper">
+            <label class="form-label" for="contact-email">Email <span class="text-red-500">*</span></label>
+            <input type="text" id="contact-email" name="email" class="form-input" placeholder="you@email.com" inputmode="email" autocomplete="email" data-validate="email">
+          </div>
+          <div class="field-wrapper">
+            <label class="form-label" for="contact-subject">Subject</label>
+            <input type="text" id="contact-subject" name="subject" class="form-input" placeholder="Order status, question, etc." data-validate="required" data-error-message="Please enter a subject">
+          </div>
+          <div class="field-wrapper">
+            <label class="form-label" for="contact-message">Message</label>
+            <textarea id="contact-message" name="message" class="form-input min-h-[120px] sm:min-h-[140px] resize-y" placeholder="Tell us how we can help..." data-validate="required" data-error-message="Please enter your message"></textarea>
+          </div>
+          <button type="submit" class="btn-primary w-full py-3.5">Send Message</button>
+        </form>
+
+        <div id="contact-success" class="hidden success-screen py-8">
+          <div class="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-7 h-7 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-swapio-dark">Message Sent!</h3>
+          <p class="text-gray-500 mt-2 text-sm">We'll get back to you as soon as possible.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <script src="js/shared.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/pages.js"></script>
+</body>
+</html>

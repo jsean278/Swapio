@@ -1,0 +1,8 @@
+{
+  "name": "swapio",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler pages dev . --compatibility-date=2024-06-19",
+    "deploy": "wrangler pages deploy . --project-name=swapio"
+  }
+}

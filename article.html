@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Read Swapio guides on gift cards, cash payouts, and getting the best value from your unused cards.">
+  <meta property="og:title" content="Article — Swapio">
+  <meta property="og:image" content="assets/logo.png">
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <title>Article — Swapio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'swapio-dark': '#2D467B',
+            'swapio-light': '#78A5D3',
+            'swapio-bg': '#F8FAFC',
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="text-gray-800" data-page="articles">
+
+  <div id="site-header"></div>
+
+  <article id="article-content" class="page-enter">
+    <section class="page-hero">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <a href="articles.html" class="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-swapio-dark transition-colors mb-6">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          Back to Articles
+        </a>
+        <span id="article-category" class="text-xs font-medium text-swapio-light uppercase tracking-wider"></span>
+        <h1 id="article-title" class="text-3xl md:text-4xl font-bold text-swapio-dark mt-2"></h1>
+        <p id="article-read-time" class="text-gray-400 text-sm mt-3"></p>
+      </div>
+    </section>
+
+    <section class="py-12">
+      <div id="article-body" class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 prose-swapio"></div>
+    </section>
+
+    <section class="py-12 bg-swapio-bg border-t border-gray-100">
+      <div class="max-w-3xl mx-auto px-4 text-center">
+        <h2 class="text-xl font-bold text-swapio-dark mb-3">Ready to swap your gift card?</h2>
+        <a href="index.html#swap" class="btn-primary">Start Your Swap →</a>
+      </div>
+    </section>
+  </article>
+
+  <div id="article-not-found" class="hidden py-24 text-center page-enter">
+    <h1 class="text-2xl font-bold text-swapio-dark">Article not found</h1>
+    <p class="text-gray-500 mt-3">This article doesn't exist or has been moved.</p>
+    <a href="articles.html" class="btn-primary mt-6 inline-flex">Browse Articles</a>
+  </div>
+
+  <div id="site-footer"></div>
+
+  <script src="js/shared.js"></script>
+  <script src="js/articles-data.js"></script>
+  <script src="js/article.js"></script>
+</body>
+</html>
