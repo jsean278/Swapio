@@ -99,7 +99,6 @@ function renderCardFields() {
 
   const req = getCardRequirements(swapState.brand);
   container.innerHTML = `
-    <p class="text-xs text-swapio-dark/70 font-medium mb-3">${req.label} details required</p>
     ${req.fields.map((field) => `
       <div class="field-wrapper">
         <label class="form-label" for="card-${field.name}">${field.label}${field.required ? ' <span class="text-red-500">*</span>' : ''}</label>
