@@ -664,7 +664,7 @@ body {
 }
 
 .page-hero {
-  background: linear-gradient(180deg, white 0%, #F8FAFC 100%);
+  background: #F8FAFC;
   padding: 3rem 0 0;
 }
 
