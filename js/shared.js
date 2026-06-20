@@ -30,9 +30,9 @@ const SWAPIO = {
   ],
 
   stats: {
-    cardsSwapped: '48,200+',
-    totalCashPaid: '$2.1M+',
-    activeUsers: '12,400+',
+    cardsSwapped: '13,400+',
+    totalCashPaid: '$487K+',
+    activeUsers: '3,200+',
   },
 };
 
