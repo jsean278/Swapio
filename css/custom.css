@@ -112,6 +112,19 @@ body {
   border-bottom: 1px solid var(--swapio-divider);
 }
 
+.site-brand {
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.site-brand:hover {
+  opacity: 0.85;
+}
+
+.site-name {
+  line-height: 1.2;
+}
+
 .site-logo {
   display: block;
   height: 2.5rem;

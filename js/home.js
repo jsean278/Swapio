@@ -1,6 +1,7 @@
 /* Swapio — Homepage swap flow */
 
-const SWAP_STEPS = ['swap-box-step1', 'offer-preview', 'swap-form-section', 'success-screen'];
+const SWAP_STEPS_HOME = ['swap-box-step1', 'offer-preview'];
+const SWAP_STEPS_SELL = ['swap-form-section', 'success-screen'];
 
 let swapState = {
   brand: null,
@@ -12,13 +13,17 @@ let brandDropdown;
 let payoutDropdown;
 
 document.addEventListener('DOMContentLoaded', () => {
+  const page = document.body.dataset.page;
+
+  if (page === 'sell') {
+    initLayout('sell');
+    initSellPage();
+    return;
+  }
+
   initLayout('home');
   initDropdowns();
   initSwapFlow();
-  initSubmissionForm();
-
-  const emailInput = document.getElementById('email');
-  if (emailInput) setupEmailValidation(emailInput);
 
   const statsEl = document.getElementById('stats-bar');
   if (statsEl) statsEl.innerHTML = getStatsBar();
@@ -49,12 +54,43 @@ function initHomeSchema() {
   document.head.appendChild(script);
 }
 
+function getSwapSteps() {
+  return document.body.dataset.page === 'sell' ? SWAP_STEPS_SELL : SWAP_STEPS_HOME;
+}
+
 function showSwapStep(stepId) {
-  SWAP_STEPS.forEach((id) => {
+  getSwapSteps().forEach((id) => {
     const el = document.getElementById(id);
     if (!el) return;
     el.classList.toggle('swap-step-active', id === stepId);
   });
+}
+
+function initSellPage() {
+  const saved = loadSwapSession();
+  if (!saved?.brand || !saved?.balance || !saved?.payoutMethod) {
+    window.location.href = '/index.html#swap';
+    return;
+  }
+
+  swapState = {
+    brand: saved.brand,
+    balance: saved.balance,
+    payoutMethod: saved.payoutMethod,
+  };
+
+  const payoutInput = document.getElementById('form-payout-method');
+  if (payoutInput) payoutInput.value = swapState.payoutMethod;
+
+  renderCardFields();
+  renderPayoutFields();
+  showSwapStep('swap-form-section');
+  initSubmissionForm();
+
+  const emailInput = document.getElementById('email');
+  if (emailInput) setupEmailValidation(emailInput);
+
+  initPageAnimations();
 }
 
 function initBrandFromUrl() {
@@ -242,16 +278,17 @@ function initSwapFlow() {
     document.getElementById('preview-fee').textContent =
       `You receive ${SWAPIO.payoutPercent}% of your card value`;
 
-    document.getElementById('form-payout-method').value = swapState.payoutMethod;
-
-    renderCardFields();
-    renderPayoutFields();
-
     showSwapStep('offer-preview');
   });
 
   continueBtn?.addEventListener('click', () => {
-    showSwapStep('swap-form-section');
+    saveSwapSession({
+      brand: swapState.brand,
+      balance: swapState.balance,
+      payoutMethod: swapState.payoutMethod,
+      payout: calculatePayout(swapState.balance),
+    });
+    window.location.href = '/sell-gift-card/';
   });
 
   document.getElementById('back-to-swap')?.addEventListener('click', resetSwapFlow);
@@ -314,6 +351,13 @@ function hideError() {
 }
 
 function resetSwapFlow() {
+  clearSwapSession();
+
+  if (document.body.dataset.page === 'sell') {
+    window.location.href = '/index.html#swap';
+    return;
+  }
+
   swapState = { brand: null, balance: null, payoutMethod: null };
 
   const brandInput = document.getElementById('brand-search');
@@ -328,7 +372,7 @@ function resetSwapFlow() {
   }
 
   document.getElementById('balance-input').value = '';
-  document.getElementById('submission-form').reset();
+  document.getElementById('submission-form')?.reset();
   document.getElementById('card-fields-container').innerHTML = '';
   document.getElementById('payout-fields-container').innerHTML = '';
   document.getElementById('form-error')?.classList.add('hidden');
@@ -419,6 +463,7 @@ function initSubmissionForm() {
       document.getElementById('success-payout').textContent =
         `${formatCurrency(payout)} via ${swapState.payoutMethod}`;
 
+      clearSwapSession();
       showSwapStep('success-screen');
     } catch (err) {
       showFormError(err.message);

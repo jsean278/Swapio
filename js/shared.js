@@ -130,13 +130,32 @@ function calculatePayout(balance) {
   return Math.round((balance - fee) * 100) / 100;
 }
 
+const SWAP_SESSION_KEY = 'swapioSwapState';
+
+function saveSwapSession(state) {
+  sessionStorage.setItem(SWAP_SESSION_KEY, JSON.stringify(state));
+}
+
+function loadSwapSession() {
+  try {
+    const raw = sessionStorage.getItem(SWAP_SESSION_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function clearSwapSession() {
+  sessionStorage.removeItem(SWAP_SESSION_KEY);
+}
+
 function getHeader(activePage = '') {
   const navItems = [
-    { href: 'index.html', label: 'Home', id: 'home' },
-    { href: 'process.html', label: 'The Process', id: 'process' },
-    { href: 'faq.html', label: 'FAQ', id: 'faq' },
-    { href: 'articles.html', label: 'Articles', id: 'articles' },
-    { href: 'contact.html', label: 'Reach Us', id: 'contact' },
+    { href: '/index.html', label: 'Home', id: 'home' },
+    { href: '/process.html', label: 'The Process', id: 'process' },
+    { href: '/faq.html', label: 'FAQ', id: 'faq' },
+    { href: '/articles.html', label: 'Articles', id: 'articles' },
+    { href: '/contact.html', label: 'Reach Us', id: 'contact' },
   ];
 
   const navBtnClass = (id) =>
@@ -152,12 +171,17 @@ function getHeader(activePage = '') {
   return `
     <header class="site-header sticky top-0 z-50 bg-white/90 backdrop-blur-md transition-shadow duration-300">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 site-header-inner">
-        <div class="relative flex items-center justify-center h-16 md:h-18">
-          <nav class="hidden md:flex items-center gap-2 flex-wrap justify-center" aria-label="Main navigation">
+        <div class="flex items-center justify-between h-16 md:h-18 gap-4">
+          <a href="/index.html" class="site-brand flex items-center gap-2.5 sm:gap-3 shrink-0" aria-label="Swapio home">
+            <img src="/assets/logo.png" alt="" class="site-logo" width="40" height="40">
+            <span class="site-name font-bold text-swapio-dark text-lg sm:text-xl tracking-tight">Swapio</span>
+          </a>
+
+          <nav class="hidden md:flex items-center gap-2 flex-wrap justify-end" aria-label="Main navigation">
             ${navLinks}
           </nav>
 
-          <button id="mobile-menu-btn" class="md:hidden absolute right-0 p-2 rounded-lg hover:bg-gray-100 transition-colors" aria-label="Open menu" aria-expanded="false">
+          <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors shrink-0" aria-label="Open menu" aria-expanded="false">
             <svg class="w-6 h-6 text-swapio-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
@@ -189,18 +213,18 @@ function getFooter() {
           <div class="footer-col">
             <h4 class="footer-heading">Explore</h4>
             <ul class="footer-list">
-              <li><a href="process.html" class="footer-link">The Process</a></li>
-              <li><a href="faq.html" class="footer-link">FAQ</a></li>
-              <li><a href="articles.html" class="footer-link">Articles</a></li>
-              <li><a href="contact.html" class="footer-link">Reach Us</a></li>
+              <li><a href="/process.html" class="footer-link">The Process</a></li>
+              <li><a href="/faq.html" class="footer-link">FAQ</a></li>
+              <li><a href="/articles.html" class="footer-link">Articles</a></li>
+              <li><a href="/contact.html" class="footer-link">Reach Us</a></li>
             </ul>
           </div>
 
           <div class="footer-col">
             <h4 class="footer-heading">Legal</h4>
             <ul class="footer-list">
-              <li><a href="terms.html" class="footer-link">Terms of Service</a></li>
-              <li><a href="privacy.html" class="footer-link">Privacy Policy</a></li>
+              <li><a href="/terms.html" class="footer-link">Terms of Service</a></li>
+              <li><a href="/privacy.html" class="footer-link">Privacy Policy</a></li>
             </ul>
           </div>
         </div>
@@ -310,7 +334,7 @@ function getProcessSteps() {
           </div>
         </div>
         <div class="text-center mt-10">
-          <a href="process.html" class="text-swapio-dark font-medium hover:text-swapio-light transition-colors inline-flex items-center gap-1">
+          <a href="/process.html" class="text-swapio-dark font-medium hover:text-swapio-light transition-colors inline-flex items-center gap-1">
             Learn more about the process
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </a>

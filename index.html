@@ -38,13 +38,10 @@
 
   <div id="site-header"></div>
 
-  <section class="relative overflow-hidden page-enter">
-    <div class="absolute inset-0 bg-gradient-to-b from-white to-swapio-bg pointer-events-none"></div>
-    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6 md:pt-16 md:pb-12 text-center">
-      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-swapio-dark tracking-tight leading-tight max-w-4xl mx-auto">
-        Turn Unused Gift Cards Into Cash Fast
-      </h1>
-      <p class="text-base sm:text-lg md:text-xl text-gray-500 mt-4 md:mt-6 max-w-2xl mx-auto leading-relaxed px-2">
+  <section class="page-hero page-enter">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-3xl md:text-4xl font-bold text-swapio-dark">Turn Unused Gift Cards Into Cash Fast</h1>
+      <p class="text-gray-500 mt-4 max-w-xl mx-auto text-lg">
         Swap your unused gift cards for real cash via PayPal, Cash App, Zelle, Venmo, Bitcoin, or Bank Transfer. Safe, simple, and paid quickly.
       </p>
     </div>
@@ -111,60 +108,6 @@
           <button id="back-to-swap" type="button" class="w-full text-center text-sm text-gray-500 hover:text-swapio-dark mt-3 transition-colors py-2">
             ← Start over
           </button>
-        </div>
-
-        <div id="swap-form-section" class="swap-step">
-          <h2 class="text-lg sm:text-xl font-bold text-swapio-dark mb-5 sm:mb-6 text-center">Submit Your Card</h2>
-
-          <div id="form-error" class="hidden mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg" role="alert"></div>
-
-          <form id="submission-form" class="space-y-4" novalidate>
-            <div id="card-fields-container" class="space-y-4"></div>
-
-            <div class="field-wrapper">
-              <label class="form-label" for="full-name">Full Name <span class="text-red-500">*</span></label>
-              <input type="text" id="full-name" name="fullName" class="form-input" placeholder="Your full name" data-validate="required" data-error-message="Please enter your full name">
-            </div>
-
-            <div class="field-wrapper">
-              <label class="form-label" for="email">Email <span class="text-red-500">*</span></label>
-              <input type="text" id="email" name="email" class="form-input" placeholder="you@email.com" inputmode="email" autocomplete="email" data-validate="email">
-            </div>
-
-            <div>
-              <label class="form-label" for="form-payout-method">Payout Method</label>
-              <input type="text" id="form-payout-method" class="form-input form-input-selected" readonly>
-            </div>
-
-            <div id="payout-fields-container" class="space-y-4"></div>
-
-            <button type="submit" id="submit-btn" class="btn-primary w-full py-3.5 sm:py-4 text-base">
-              Submit Swap
-            </button>
-          </form>
-
-          <p class="text-xs text-gray-400 text-center mt-4">
-            By submitting, you agree to our <a href="terms.html" class="text-swapio-dark underline">Terms of Service</a>.
-          </p>
-        </div>
-
-        <div id="success-screen" class="swap-step success-screen">
-          <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
-            <svg class="w-7 h-7 sm:w-8 sm:h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-            </svg>
-          </div>
-          <h2 class="text-xl sm:text-2xl font-bold text-swapio-dark">Swap Submitted Successfully!</h2>
-          <p class="text-gray-500 mt-3 max-w-sm mx-auto text-sm sm:text-base">
-            We'll verify your card and send your cash within hours.
-          </p>
-          <p class="text-sm text-gray-400 mt-6">Your order code</p>
-          <div id="success-order-code" class="order-code text-xl sm:text-2xl"></div>
-          <p class="text-sm text-gray-500">
-            You'll receive <span id="success-payout" class="font-semibold text-swapio-dark"></span>
-          </p>
-          <p class="text-xs text-gray-400 mt-4 px-2">Save your order code for reference.</p>
-          <button type="button" id="start-another-swap" class="btn-secondary mt-6 sm:mt-8 w-full sm:w-auto">Start Another Swap</button>
         </div>
 
       </div>
