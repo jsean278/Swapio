@@ -168,6 +168,8 @@ function formatPayoutDetails(method, details, fallback) {
     paypalEmail: 'PayPal Email',
     cashtag: 'Cash App Tag',
     zelleEmail: 'Zelle Email',
+    venmoPhone: 'Venmo Phone',
+    bitcoinAddress: 'Bitcoin Address',
     routingNumber: 'Routing Number',
     accountNumber: 'Account Number',
   };

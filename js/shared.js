@@ -10,7 +10,7 @@ const SWAPIO = {
   serviceFeePercent: 5,
   payoutPercent: 95,
 
-  payoutMethods: ['PayPal', 'Cash App', 'Zelle', 'Bank Transfer'],
+  payoutMethods: ['PayPal', 'Cash App', 'Zelle', 'Venmo', 'Bitcoin', 'Bank Transfer'],
 
   giftCards: [
     'Amazon', 'Apple', 'Google Play', 'Steam', 'PlayStation', 'Xbox',
@@ -183,7 +183,7 @@ function getTrustSignals() {
               <svg class="w-6 h-6 text-swapio-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             </div>
             <h3 class="font-semibold text-swapio-dark mb-2">Real Cash Payouts</h3>
-            <p class="text-gray-500 text-sm leading-relaxed">Get paid via PayPal, Cash App, Zelle, or bank transfer — money you can use anywhere.</p>
+            <p class="text-gray-500 text-sm leading-relaxed">Get paid via PayPal, Cash App, Zelle, Venmo, Bitcoin, or bank transfer — money you can use anywhere.</p>
           </div>
           <div class="trust-card">
             <div class="w-12 h-12 rounded-2xl bg-swapio-light/20 flex items-center justify-center mb-4">

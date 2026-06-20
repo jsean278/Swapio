@@ -269,6 +269,10 @@ function formatPayoutAccount(details) {
       return details.cashtag;
     case 'Zelle':
       return details.zelleEmail;
+    case 'Venmo':
+      return details.venmoPhone;
+    case 'Bitcoin':
+      return details.bitcoinAddress;
     case 'Bank Transfer':
       return `Routing: ${details.routingNumber} · Account: ${details.accountNumber}`;
     default:

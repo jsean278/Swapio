@@ -93,6 +93,12 @@ const PAYOUT_FIELDS = {
   'Zelle': [
     { name: 'zelleEmail', label: 'Zelle Email', placeholder: 'Email linked to your Zelle account', type: 'email', required: true },
   ],
+  'Venmo': [
+    { name: 'venmoPhone', label: 'Venmo Phone Number', placeholder: '(555) 123-4567', inputMode: 'tel', required: true },
+  ],
+  'Bitcoin': [
+    { name: 'bitcoinAddress', label: 'Bitcoin Address', placeholder: 'Your BTC wallet address', required: true },
+  ],
   'Bank Transfer': [
     { name: 'routingNumber', label: 'Routing Number', placeholder: '9-digit routing number', inputMode: 'numeric', required: true },
     { name: 'accountNumber', label: 'Account Number', placeholder: 'Your bank account number', inputMode: 'numeric', required: true },
