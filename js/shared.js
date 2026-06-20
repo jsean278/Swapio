@@ -2,7 +2,7 @@
 
 const SWAPIO = {
   siteName: 'Swapio',
-  supportEmail: 'swapio400@gmail.com',
+  supportEmail: 'support@swapio.cc',
 
   colors: {
     darkBlue: '#2D467B',
@@ -185,7 +185,7 @@ function getHeader(activePage = '') {
     .join('');
 
   return `
-    <header class="site-header sticky top-0 z-50 bg-white/90 backdrop-blur-md transition-shadow duration-300">
+    <header class="site-header sticky top-0 z-50 bg-white transition-shadow duration-300">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 site-header-inner">
         <div class="relative flex items-center justify-center h-16 md:h-18">
           <nav class="hidden md:flex items-center gap-2 flex-wrap justify-center" aria-label="Main navigation">

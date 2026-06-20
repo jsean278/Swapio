@@ -47,7 +47,6 @@ body {
 
 .site-header-inner {
   position: relative;
-  border-bottom: 1px solid var(--swapio-divider);
 }
 
 .footer-links {
@@ -675,6 +674,10 @@ body {
   border-bottom: 1px solid var(--swapio-divider);
 }
 
+.page-hero--plain {
+  background: #F8FAFC;
+}
+
 .page-hero--plain > div {
   border-bottom: none;
   padding-bottom: 1.5rem;
@@ -703,14 +706,12 @@ body {
 }
 
 @media (max-width: 639px) {
-  .site-header-inner,
   .page-hero > div,
   .stats-bar-inner,
   .contained-divider-top {
     border-color: transparent;
   }
 
-  .site-header-inner::after,
   .page-hero:not(.page-hero--plain) > div::after,
   .contained-divider-top::before {
     content: '';
@@ -722,7 +723,6 @@ body {
     pointer-events: none;
   }
 
-  .site-header-inner::after,
   .page-hero:not(.page-hero--plain) > div::after {
     bottom: 0;
   }
