@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initPageAnimations();
   initHomeSchema();
+  updateGetOfferButton();
 });
 
 function initHomeSchema() {
@@ -163,17 +164,53 @@ function renderPayoutFields() {
   });
 }
 
+function syncSwapStateFromInputs() {
+  const brandInput = document.getElementById('brand-search');
+  const payoutInput = document.getElementById('payout-search');
+  const balanceInput = document.getElementById('balance-input');
+
+  if (brandInput) {
+    const brandValue = brandInput.value.trim();
+    const brandMatch = SWAPIO.giftCards.find(
+      (item) => item.toLowerCase() === brandValue.toLowerCase()
+    );
+    if (brandMatch) {
+      swapState.brand = brandMatch;
+      brandInput.classList.add('form-input-selected');
+    }
+  }
+
+  if (payoutInput) {
+    const payoutValue = payoutInput.value.trim();
+    const payoutMatch = SWAPIO.payoutMethods.find(
+      (item) => item.toLowerCase() === payoutValue.toLowerCase()
+    );
+    if (payoutMatch) {
+      swapState.payoutMethod = payoutMatch;
+      payoutInput.classList.add('form-input-selected');
+    }
+  }
+
+  if (balanceInput) {
+    const balance = parseFloat(balanceInput.value);
+    swapState.balance = Number.isFinite(balance) ? balance : null;
+  }
+}
+
 function initSwapFlow() {
   const balanceInput = document.getElementById('balance-input');
   const getOfferBtn = document.getElementById('get-offer-btn');
   const continueBtn = document.getElementById('continue-btn');
 
   const syncBalance = () => {
-    swapState.balance = parseFloat(balanceInput.value) || null;
+    syncSwapStateFromInputs();
     updateGetOfferButton();
   };
 
-  balanceInput?.addEventListener('input', syncBalance);
+  balanceInput?.addEventListener('input', () => {
+    balanceInput.value = balanceInput.value.replace(/[^\d]/g, '');
+    syncBalance();
+  });
   balanceInput?.addEventListener('change', syncBalance);
   balanceInput?.addEventListener('blur', syncBalance);
 
@@ -205,6 +242,7 @@ function initSwapFlow() {
 }
 
 function validateSwapSelection() {
+  syncSwapStateFromInputs();
   const balanceInput = document.getElementById('balance-input');
   const balance = parseFloat(balanceInput?.value);
 
@@ -233,14 +271,18 @@ function validateSwapSelection() {
 function updateGetOfferButton() {
   const btn = document.getElementById('get-offer-btn');
   if (!btn) return;
+
+  syncSwapStateFromInputs();
+
   const balance = parseFloat(document.getElementById('balance-input')?.value);
   const valid =
     swapState.brand &&
+    Number.isFinite(balance) &&
     balance >= 10 &&
     balance <= 5000 &&
     swapState.payoutMethod;
-  btn.disabled = false;
-  btn.setAttribute('aria-disabled', String(!valid));
+
+  btn.disabled = !valid;
 }
 
 function showError(msg) {

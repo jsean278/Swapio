@@ -45,7 +45,7 @@ function initSearchableDropdown({
     listEl.innerHTML = filtered
       .map(
         (item, index) =>
-          `<div class="dropdown-item${selected === item ? ' selected' : ''}" data-${dataAttr}-index="${index}">${escapeHtml(item)}</div>`
+          `<button type="button" class="dropdown-item${selected === item ? ' selected' : ''}" data-${dataAttr}-index="${index}">${escapeHtml(item)}</button>`
       )
       .join('');
 
@@ -87,18 +87,33 @@ function initSearchableDropdown({
   });
 
   function getItemFromEvent(e) {
-    const item = e.target.closest(`.dropdown-item[data-${dataAttr}-index]`);
+    const item = e.target.closest(`button.dropdown-item[data-${dataAttr}-index]`);
     if (!item || item.classList.contains('dropdown-empty')) return null;
     const index = Number(item.getAttribute(`data-${dataAttr}-index`));
     return listEl._filteredItems?.[index] ?? null;
   }
 
-  listEl.addEventListener('click', (e) => {
-    const value = getItemFromEvent(e);
-    if (value) selectItem(value);
-  });
+  let lastSelectAt = 0;
 
-  listEl.addEventListener('mousedown', (e) => e.preventDefault());
+  function handleItemSelect(e) {
+    const value = getItemFromEvent(e);
+    if (!value) return;
+
+    const now = Date.now();
+    if (now - lastSelectAt < 400) return;
+    lastSelectAt = now;
+
+    e.preventDefault();
+    e.stopPropagation();
+    selectItem(value);
+  }
+
+  listEl.addEventListener('click', handleItemSelect);
+  listEl.addEventListener('touchend', handleItemSelect, { passive: false });
+
+  listEl.addEventListener('mousedown', (e) => {
+    if (e.target.closest('button.dropdown-item')) e.preventDefault();
+  });
 
   inputEl.addEventListener('keydown', (e) => {
     const optionItems = listEl.querySelectorAll(`.dropdown-item[data-${dataAttr}-index]`);
@@ -125,7 +140,7 @@ function initSearchableDropdown({
   });
 
   document.addEventListener('pointerdown', (e) => {
-    if (!e.target.closest('.dropdown-wrapper')) {
+    if (!wrapper?.contains(e.target)) {
       closeList();
     }
   });
