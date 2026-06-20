@@ -76,7 +76,7 @@ function getHeader(activePage = '') {
     .join('');
 
   return `
-    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b site-divider transition-shadow duration-300">
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="relative flex items-center justify-center h-16 md:h-18">
           <nav class="hidden md:flex items-center gap-2 flex-wrap justify-center" aria-label="Main navigation">
@@ -91,7 +91,7 @@ function getHeader(activePage = '') {
         </div>
       </div>
 
-      <div id="mobile-menu" class="mobile-menu hidden md:hidden border-t site-divider bg-white">
+      <div id="mobile-menu" class="mobile-menu hidden md:hidden border-t border-gray-100 bg-white">
         <nav class="flex flex-col px-4 py-4 gap-2" aria-label="Mobile navigation">
           ${navItems
             .map(
@@ -157,7 +157,7 @@ function getFooter() {
 
 function getStatsBar() {
   return `
-    <section class="bg-white border-y site-divider">
+    <section class="bg-white border-y border-gray-100">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
           <div>
