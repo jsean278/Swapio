@@ -1,4 +1,7 @@
 function getBrandSlugFromLocation() {
+  const embeddedSlug = document.body.dataset.brandSlug;
+  if (embeddedSlug && BRANDS[embeddedSlug]) return embeddedSlug;
+
   const querySlug = new URLSearchParams(window.location.search).get('slug');
   if (querySlug && BRANDS[querySlug]) return querySlug;
 
@@ -28,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const url = getBrandPublicUrl(slug);
-  const swapUrl = `index.html?brand=${encodeURIComponent(brand.name)}#swap`;
+  const swapUrl = `/index.html?brand=${encodeURIComponent(brand.name)}#swap`;
 
   document.title = `${brand.title} — Swapio`;
   document.querySelector('meta[name="description"]')?.setAttribute('content', brand.description);
