@@ -168,7 +168,7 @@ function isValidSwapSession(saved) {
 function getHeader(activePage = '') {
   const navItems = [
     { href: '/index.html', label: 'Home', id: 'home' },
-    { href: '/process.html', label: 'The Process', id: 'process' },
+    { href: '/guide.html', label: 'Guide', id: 'guide' },
     { href: '/faq.html', label: 'FAQ', id: 'faq' },
     { href: '/articles.html', label: 'Articles', id: 'articles' },
     { href: '/contact.html', label: 'Reach Us', id: 'contact' },
@@ -224,7 +224,7 @@ function getFooter() {
           <div class="footer-col">
             <h4 class="footer-heading">Explore</h4>
             <ul class="footer-list">
-              <li><a href="/process.html" class="footer-link">The Process</a></li>
+              <li><a href="/guide.html" class="footer-link">Guide</a></li>
               <li><a href="/faq.html" class="footer-link">FAQ</a></li>
               <li><a href="/articles.html" class="footer-link">Articles</a></li>
               <li><a href="/contact.html" class="footer-link">Reach Us</a></li>
@@ -345,8 +345,8 @@ function getProcessSteps() {
           </div>
         </div>
         <div class="text-center mt-10">
-          <a href="/process.html" class="text-swapio-dark font-medium hover:text-swapio-light transition-colors inline-flex items-center gap-1">
-            Learn more about the process
+          <a href="/guide.html" class="text-swapio-dark font-medium hover:text-swapio-light transition-colors inline-flex items-center gap-1">
+            Read the full guide
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </a>
         </div>
