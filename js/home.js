@@ -58,12 +58,24 @@ function getSwapSteps() {
   return document.body.dataset.page === 'sell' ? SWAP_STEPS_SELL : SWAP_STEPS_HOME;
 }
 
+const SWAP_STEP_TITLES = {
+  'swap-box-step1': 'Start Your Swap',
+  'offer-preview': 'Your Cash Offer',
+};
+
+function updateSwapStepTitle(stepId) {
+  const titleEl = document.getElementById('swap-step-title');
+  if (!titleEl) return;
+  titleEl.textContent = SWAP_STEP_TITLES[stepId] || SWAP_STEP_TITLES['swap-box-step1'];
+}
+
 function showSwapStep(stepId) {
   getSwapSteps().forEach((id) => {
     const el = document.getElementById(id);
     if (!el) return;
     el.classList.toggle('swap-step-active', id === stepId);
   });
+  updateSwapStepTitle(stepId);
 }
 
 function initSellPage() {
