@@ -49,7 +49,7 @@ function getSiteOrigin() {
   if (typeof window !== 'undefined' && window.location?.origin && window.location.origin !== 'null') {
     return window.location.origin;
   }
-  return 'https://swapio.pages.dev';
+  return 'https://swapio.cc';
 }
 
 function setMeta(attr, key, value) {

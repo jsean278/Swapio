@@ -1,8 +1,23 @@
+function getBrandSlugFromLocation() {
+  const querySlug = new URLSearchParams(window.location.search).get('slug');
+  if (querySlug && BRANDS[querySlug]) return querySlug;
+
+  const segment = window.location.pathname.replace(/\/+$/, '').split('/').filter(Boolean).pop() || '';
+  const match = segment.match(/^sell-(.+)-gift-card$/);
+  if (match && BRANDS[match[1]]) return match[1];
+
+  return null;
+}
+
+function getBrandPublicUrl(slug) {
+  const origin = getSiteOrigin();
+  return `${origin}/sell-${slug}-gift-card`;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initLayout('');
 
-  const params = new URLSearchParams(window.location.search);
-  const slug = params.get('slug');
+  const slug = getBrandSlugFromLocation();
   const brand = slug && BRANDS[slug];
 
   if (!brand) {
@@ -12,8 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  const origin = getSiteOrigin();
-  const url = `${origin}/brand.html?slug=${encodeURIComponent(slug)}`;
+  const url = getBrandPublicUrl(slug);
   const swapUrl = `index.html?brand=${encodeURIComponent(brand.name)}#swap`;
 
   document.title = `${brand.title} — Swapio`;
