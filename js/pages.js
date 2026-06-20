@@ -57,10 +57,10 @@ function initContactForm() {
         timestamp: new Date().toISOString(),
       });
 
-      form.style.opacity = '0';
-      form.style.transform = 'translateY(-8px)';
+      const panel = document.getElementById('contact-form-panel');
+      panel?.classList.add('is-hiding');
       setTimeout(() => {
-        form.classList.add('hidden');
+        panel?.classList.add('hidden');
         const success = document.getElementById('contact-success');
         success?.classList.remove('hidden');
         success?.classList.add('fade-in');

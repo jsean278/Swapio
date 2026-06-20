@@ -27,6 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const processEl = document.getElementById('process-steps');
   if (processEl) processEl.innerHTML = getProcessSteps();
+
+  initPageAnimations();
 });
 
 function showSwapStep(stepId) {

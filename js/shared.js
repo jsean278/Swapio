@@ -271,6 +271,25 @@ function initHeaderScroll() {
   window.addEventListener('scroll', onScroll, { passive: true });
 }
 
+function initPageAnimations() {
+  const targets = Array.from(
+    document.querySelectorAll(
+      'body > section, body > article, body > #stats-bar, body > #process-steps, body > #trust-signals'
+    )
+  ).filter((el) => !el.classList.contains('hidden'));
+
+  let delayIndex = 0;
+  targets.forEach((el) => {
+    if (el.classList.contains('page-animate')) return;
+
+    if (!el.classList.contains('page-enter')) {
+      el.classList.add('page-animate');
+      el.style.setProperty('--page-enter-delay', `${delayIndex * 0.08}s`);
+    }
+    delayIndex += 1;
+  });
+}
+
 function initLayout(activePage = '') {
   const headerEl = document.getElementById('site-header');
   const footerEl = document.getElementById('site-footer');
@@ -278,6 +297,7 @@ function initLayout(activePage = '') {
   if (footerEl) footerEl.innerHTML = getFooter();
   initMobileMenu();
   initHeaderScroll();
+  initPageAnimations();
 }
 
 async function submitToTelegram(data) {
