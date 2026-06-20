@@ -1,5 +1,9 @@
 /* Swapio — Custom styles */
 
+:root {
+  --swapio-divider: rgba(45, 70, 123, 0.35);
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -8,6 +12,11 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   background-color: #F8FAFC;
   -webkit-font-smoothing: antialiased;
+}
+
+.site-divider,
+.site-divider-top {
+  border-color: var(--swapio-divider);
 }
 
 .site-logo {
@@ -22,6 +31,8 @@ body {
 .site-logo--footer {
   height: 2.25rem;
   width: 2.25rem;
+  border-radius: 0;
+  object-fit: contain;
 }
 
 .nav-btn {
@@ -101,7 +112,12 @@ body {
   opacity: 1;
   pointer-events: auto;
   overflow: visible;
-  animation: fadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: stepEnter 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes stepEnter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .btn-primary {
@@ -114,7 +130,7 @@ body {
   font-weight: 600;
   padding: 0.75rem 1.5rem;
   border-radius: 0.75rem;
-  transition: all 0.2s ease;
+  transition: background-color 0.25s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
   border: none;
   cursor: pointer;
 }
@@ -139,7 +155,7 @@ body {
   font-weight: 600;
   padding: 0.75rem 1.5rem;
   border-radius: 0.75rem;
-  transition: all 0.2s ease;
+  transition: background-color 0.25s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
   border: none;
   cursor: pointer;
 }
@@ -166,7 +182,8 @@ body {
 }
 
 .trust-card:hover {
-  box-shadow: 0 4px 20px rgba(45, 70, 123, 0.08);
+  box-shadow: 0 8px 28px rgba(45, 70, 123, 0.1);
+  transform: translateY(-2px);
 }
 
 .process-step {
@@ -192,8 +209,9 @@ body {
   background: white;
   border-radius: 1.25rem;
   box-shadow: 0 4px 24px rgba(45, 70, 123, 0.08);
-  border: 1px solid #e2e8f0;
+  border: 1px solid rgba(45, 70, 123, 0.12);
   overflow: visible;
+  transition: box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 #swap {
@@ -203,10 +221,10 @@ body {
 .form-input {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 1px solid #e2e8f0;
+  border: 1px solid rgba(45, 70, 123, 0.15);
   border-radius: 0.75rem;
   font-size: 0.9375rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
   background: white;
 }
 
@@ -270,15 +288,20 @@ body {
   overscroll-behavior: contain;
   touch-action: pan-y;
   background: #ffffff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid rgba(45, 70, 123, 0.15);
   border-radius: 0.75rem;
   box-shadow: 0 12px 32px rgba(45, 70, 123, 0.12);
   z-index: 100;
   display: none;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .dropdown-list.open {
   display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .dropdown-item {
@@ -335,7 +358,7 @@ body {
 
 .offer-preview {
   background: linear-gradient(135deg, rgba(45, 70, 123, 0.05), rgba(120, 165, 211, 0.1));
-  border: 1px solid rgba(120, 165, 211, 0.3);
+  border: 1px solid rgba(45, 70, 123, 0.18);
   border-radius: 1rem;
   padding: 1.5rem;
 }
@@ -451,11 +474,11 @@ body {
 
 .page-hero > div {
   padding-bottom: 3rem;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--swapio-divider);
 }
 
 .contained-divider-top {
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid var(--swapio-divider);
 }
 
 .prose-swapio h2 {

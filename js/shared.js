@@ -76,7 +76,7 @@ function getHeader(activePage = '') {
     .join('');
 
   return `
-    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b site-divider transition-shadow duration-300">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="relative flex items-center justify-center h-16 md:h-18">
           <nav class="hidden md:flex items-center gap-2 flex-wrap justify-center" aria-label="Main navigation">
@@ -91,7 +91,7 @@ function getHeader(activePage = '') {
         </div>
       </div>
 
-      <div id="mobile-menu" class="mobile-menu hidden md:hidden border-t border-gray-100 bg-white">
+      <div id="mobile-menu" class="mobile-menu hidden md:hidden border-t site-divider bg-white">
         <nav class="flex flex-col px-4 py-4 gap-2" aria-label="Mobile navigation">
           ${navItems
             .map(
@@ -109,15 +109,7 @@ function getFooter() {
   return `
     <footer class="bg-swapio-dark text-white">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
-          <div class="md:col-span-1">
-            <div class="flex items-center gap-2.5 mb-4">
-              <img src="assets/logo-footer.png" alt="Swapio" class="site-logo site-logo--footer" width="40" height="40">
-              <span class="text-xl font-bold">Swapio</span>
-            </div>
-            <p class="text-white/70 text-sm leading-relaxed">Turn unused gift cards into real cash. Safe, simple, and paid quickly.</p>
-          </div>
-
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
           <div>
             <h4 class="font-semibold mb-4 text-white/90">Explore</h4>
             <ul class="space-y-2 text-sm text-white/70">
@@ -135,16 +127,6 @@ function getFooter() {
               <li><a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a></li>
             </ul>
           </div>
-
-          <div>
-            <h4 class="font-semibold mb-4 text-white/90">Payout Methods</h4>
-            <ul class="space-y-2 text-sm text-white/70">
-              <li>PayPal</li>
-              <li>Cash App</li>
-              <li>Zelle</li>
-              <li>Bank Transfer</li>
-            </ul>
-          </div>
         </div>
 
         <div class="border-t border-white/10 mt-10 pt-8 text-center">
@@ -157,7 +139,7 @@ function getFooter() {
 
 function getStatsBar() {
   return `
-    <section class="bg-white border-y border-gray-100">
+    <section class="bg-white border-y site-divider">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
           <div>

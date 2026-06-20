@@ -69,7 +69,7 @@ const ARTICLES = {
       <p>Not all gift cards are created equal when it comes to resale value. While Swapio offers a consistent 5% fee across all brands, some cards are swapped more often because they're widely used and easy to verify.</p>
 
       <h2>1. Amazon</h2>
-      <p>The most submitted card on Swapio. High demand, easy verification, and balances from $15 to $500+.</p>
+      <p>The most submitted card on Swapio. High demand, easy verification, and balances from $10 to $5,000.</p>
 
       <h2>2. Visa / Mastercard</h2>
       <p>Open-loop prepaid cards are essentially cash already — which makes them fast to verify and popular for swaps.</p>
@@ -172,7 +172,7 @@ const ARTICLES = {
       <p>Set a timer for 15 minutes. Gather every card you can find — physical and digital. Write down the brand and estimated balance for each. You'll likely be surprised by the total.</p>
 
       <h2>Sort and prioritize</h2>
-      <p>Group cards by whether you'll actually use them. Keep the ones for stores you love. For everything else, swap them on Swapio. Even a $15 balance is worth converting — that's $14.25 in your pocket after the service fee.</p>
+      <p>Group cards by whether you'll actually use them. Keep the ones for stores you love. For everything else, swap them on Swapio. Even a $10 balance is worth converting — that's $9.50 in your pocket after the service fee.</p>
 
       <h2>Batch your swaps</h2>
       <p>Swapio makes it easy to submit multiple cards one at a time. Each gets its own order code. Use the same payout method for all of them to keep things simple.</p>
@@ -180,7 +180,7 @@ const ARTICLES = {
       <h2>Prevent future clutter</h2>
       <p>When you receive a gift card you won't use, swap it within a week. The sooner you convert, the sooner you benefit. Don't let cards sit for months — balances get forgotten, cards get lost.</p>
 
-      <p>A quick afternoon of decluttering could put real cash in your account by evening — even a $15 card pays out $14.25. Start with the card closest to you right now.</p>
+      <p>A quick afternoon of decluttering could put real cash in your account by evening — even a $10 card pays out $9.50. Start with the card closest to you right now.</p>
     `,
   },
 };

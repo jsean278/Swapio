@@ -177,8 +177,12 @@ function validateSwapSelection() {
     showError('Please select a gift card brand.');
     return false;
   }
-  if (!balance || balance < 15) {
-    showError('Minimum balance is $15.');
+  if (!balance || balance < 10) {
+    showError('Minimum balance is $10.');
+    return false;
+  }
+  if (balance > 5000) {
+    showError('Maximum balance is $5,000.');
     return false;
   }
   if (!swapState.payoutMethod) {
@@ -196,7 +200,8 @@ function updateGetOfferButton() {
   if (!btn) return;
   const valid =
     swapState.brand &&
-    parseFloat(document.getElementById('balance-input')?.value) >= 15 &&
+    parseFloat(document.getElementById('balance-input')?.value) >= 10 &&
+    parseFloat(document.getElementById('balance-input')?.value) <= 5000 &&
     swapState.payoutMethod;
   btn.disabled = !valid;
 }
