@@ -278,8 +278,6 @@ function initSwapFlow() {
       `${swapState.brand} ${formatCurrency(swapState.balance)}`;
     document.getElementById('preview-payout').textContent =
       `${formatCurrency(payout)} via ${swapState.payoutMethod}`;
-    document.getElementById('preview-fee').textContent =
-      `You receive ${SWAPIO.payoutPercent}% of your card value`;
 
     showSwapStep('offer-preview');
   });

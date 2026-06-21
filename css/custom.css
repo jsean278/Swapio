@@ -680,7 +680,11 @@ body {
 
 .page-hero--plain > div {
   border-bottom: none;
-  padding-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+}
+
+.mobile-menu-btn {
+  border: 1px solid var(--swapio-divider);
 }
 
 .article-hero {
