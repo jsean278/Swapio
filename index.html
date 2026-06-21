@@ -90,16 +90,10 @@
 
         <div id="offer-preview" class="swap-step">
           <h2 class="text-lg sm:text-xl font-bold text-swapio-dark mb-5 sm:mb-6 text-center">Your Cash Offer</h2>
-          <div class="offer-preview space-y-4">
-            <div class="flex justify-between items-center gap-4">
-              <span class="text-gray-500 text-sm sm:text-base">Your Card</span>
-              <span id="preview-card" class="font-bold text-base sm:text-lg text-swapio-dark text-right"></span>
-            </div>
-            <div class="border-t site-divider"></div>
-            <div class="flex justify-between items-center gap-4">
-              <span class="text-gray-500 text-sm sm:text-base">You'll Receive</span>
-              <span id="preview-payout" class="font-bold text-base sm:text-lg text-swapio-dark text-right"></span>
-            </div>
+          <div class="offer-preview">
+            <p id="preview-card" class="text-sm text-gray-500"></p>
+            <div id="preview-payout" class="offer-payout-amount"></div>
+            <p id="preview-fee-note" class="text-sm text-gray-400 mt-4"></p>
           </div>
           <button id="continue-btn" class="btn-primary w-full py-3.5 sm:py-4 text-base mt-6">
             Continue to Submit →

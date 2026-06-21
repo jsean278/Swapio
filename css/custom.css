@@ -537,6 +537,21 @@ body {
   border: 1px solid rgba(45, 70, 123, 0.18);
   border-radius: 1rem;
   padding: 1.5rem;
+  text-align: center;
+}
+
+.offer-payout-amount {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #2D467B;
+  line-height: 1.2;
+  margin-top: 1rem;
+}
+
+@media (min-width: 640px) {
+  .offer-payout-amount {
+    font-size: 2rem;
+  }
 }
 
 .success-screen {

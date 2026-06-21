@@ -70,7 +70,7 @@ function initSellPage() {
   const saved = loadSwapSession();
   if (!isValidSwapSession(saved)) {
     clearSwapSession();
-    window.location.replace('/index.html#swap');
+    window.location.replace('/index.html');
     return;
   }
 
@@ -275,9 +275,11 @@ function initSwapFlow() {
     const payout = calculatePayout(swapState.balance);
 
     document.getElementById('preview-card').textContent =
-      `${swapState.brand} ${formatCurrency(swapState.balance)}`;
+      `Your card: ${swapState.brand} ${formatCurrency(swapState.balance)}`;
     document.getElementById('preview-payout').textContent =
-      `${formatCurrency(payout)} via ${swapState.payoutMethod}`;
+      `${swapState.payoutMethod} ${formatCurrency(payout)}`;
+    document.getElementById('preview-fee-note').textContent =
+      `You receive · ${SWAPIO.serviceFeePercent}% service fee`;
 
     showSwapStep('offer-preview');
   });
@@ -358,7 +360,7 @@ function resetSwapFlow() {
   clearSwapSession();
 
   if (document.body.dataset.page === 'sell') {
-    window.location.href = '/index.html#swap';
+    window.location.href = '/index.html';
     return;
   }
 
