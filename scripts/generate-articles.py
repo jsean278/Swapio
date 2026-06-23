@@ -104,7 +104,7 @@ def build_related_section(slug, article):
         return ''
 
     links = '\n            '.join(
-        f'<li><a href="/articles/{s}" class="text-swapio-dark hover:text-swapio-light transition-colors font-medium">{ARTICLES[s]["title"]}</a></li>'
+        f'<li><a href="/articles/{s}/" class="text-swapio-dark hover:text-swapio-light transition-colors font-medium">{ARTICLES[s]["title"]}</a></li>'
         for s in related
     )
 
@@ -124,7 +124,7 @@ def esc(text):
 
 
 def build_article_page(slug, article):
-    canonical = f'{SITE}/articles/{slug}'
+    canonical = f'{SITE}/articles/{slug}/'
     title = article.get('metaTitle') or f"{article['title']} | Swapio"
     description = get_excerpt(article)
     content = normalize_content(article['content'])
@@ -253,7 +253,7 @@ def build_sitemap():
     ]
 
     urls = static_pages + [
-        (f'{SITE}/articles/{slug}', 'monthly', '0.7') for slug in sorted(ARTICLES)
+        (f'{SITE}/articles/{slug}/', 'monthly', '0.7') for slug in sorted(ARTICLES)
     ]
 
     body = '\n'.join(
@@ -280,16 +280,16 @@ def build_redirects():
         '# Articles index',
         '/articles.html  /articles/  301',
         '',
-        '# Legacy article URLs → SEO-friendly paths',
-        '/article.html?slug=:slug  /articles/:slug  301',
-        '/article?slug=:slug  /articles/:slug  301',
+        '# Legacy article URLs → SEO-friendly paths (explicit per slug)',
         '/article.html  /articles/  301',
         '/article  /articles/  301',
         '',
     ]
 
     for slug in sorted(ARTICLES):
-        lines.append(f'/articles/{slug}/  /articles/{slug}  301')
+        dest = f'/articles/{slug}/'
+        lines.append(f'/article.html?slug={slug}  {dest}  301')
+        lines.append(f'/article?slug={slug}  {dest}  301')
 
     return '\n'.join(lines) + '\n'
 

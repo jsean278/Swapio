@@ -54,7 +54,7 @@ function getSiteOrigin() {
 }
 
 function getArticleUrl(slug) {
-  return `/articles/${slug}`;
+  return `/articles/${slug}/`;
 }
 
 function setMeta(attr, key, value) {
