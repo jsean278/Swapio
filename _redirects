@@ -1,8 +1,24 @@
-/sell-amazon-gift-card      /brand.html?slug=amazon        200
-/sell-apple-gift-card       /brand.html?slug=apple         200
-/sell-visa-gift-card        /brand.html?slug=visa          200
-/sell-target-gift-card      /brand.html?slug=target        200
-/sell-steam-gift-card       /brand.html?slug=steam         200
-/sell-google-play-gift-card /brand.html?slug=google-play   200
-/sell-playstation-gift-card /brand.html?slug=playstation  200
-/sell-walmart-gift-card     /brand.html?slug=walmart       200
+# Canonical homepage
+/index.html  /  301
+
+# Articles index
+/articles.html  /articles/  301
+
+# Legacy article URLs → SEO-friendly paths
+/article.html?slug=:slug  /articles/:slug  301
+/article?slug=:slug  /articles/:slug  301
+/article.html  /articles/  301
+/article  /articles/  301
+
+/articles/after-you-submit/  /articles/after-you-submit  301
+/articles/best-cash-value-gift-cards/  /articles/best-cash-value-gift-cards  301
+/articles/declutter-gift-cards/  /articles/declutter-gift-cards  301
+/articles/gift-card-scams-to-avoid/  /articles/gift-card-scams-to-avoid  301
+/articles/how-long-do-payouts-take/  /articles/how-long-do-payouts-take  301
+/articles/payout-methods-compared/  /articles/payout-methods-compared  301
+/articles/real-value-from-gift-cards/  /articles/real-value-from-gift-cards  301
+/articles/safely-sell-gift-cards-online/  /articles/safely-sell-gift-cards-online  301
+/articles/sell-amazon-gift-card-for-cash/  /articles/sell-amazon-gift-card-for-cash  301
+/articles/sell-steam-gift-card-for-cash/  /articles/sell-steam-gift-card-for-cash  301
+/articles/sell-visa-gift-card-for-cash/  /articles/sell-visa-gift-card-for-cash  301
+/articles/venmo-bitcoin-payouts/  /articles/venmo-bitcoin-payouts  301

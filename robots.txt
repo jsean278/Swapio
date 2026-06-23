@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /login.html
+Disallow: /signup.html
+Disallow: /dashboard.html
+Disallow: /process.html
 
 Sitemap: https://swapio.cc/sitemap.xml

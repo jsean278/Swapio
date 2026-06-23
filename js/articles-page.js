@@ -1,3 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
   initLayout('articles');
+  renderArticleGrid();
 });
+
+function renderArticleGrid() {
+  const grid = document.getElementById('article-grid');
+  if (!grid || typeof ARTICLES === 'undefined') return;
+
+  const slugs = Object.keys(ARTICLES);
+  grid.innerHTML = slugs
+    .map((slug) => {
+      const article = ARTICLES[slug];
+      const seo = typeof ARTICLE_SEO !== 'undefined' ? ARTICLE_SEO[slug] : null;
+      const excerpt = seo?.metaDescription || getArticleExcerpt(article);
+      const href = getArticleUrl(slug);
+      const shortExcerpt =
+        excerpt.length > 140 ? `${excerpt.slice(0, 137)}…` : excerpt;
+
+      return `
+        <a href="${href}" class="article-card scroll-reveal scroll-reveal--card">
+          <div class="h-40 bg-gradient-to-br ${article.gradient} flex items-center justify-center">
+            <svg class="w-12 h-12 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          </div>
+          <div class="p-6">
+            <span class="text-xs font-medium text-swapio-light uppercase tracking-wider">${article.category}</span>
+            <h2 class="text-lg font-bold text-swapio-dark mt-2 mb-2">${article.title}</h2>
+            <p class="text-gray-500 text-sm leading-relaxed">${shortExcerpt}</p>
+            <p class="read-more mt-4">Read article →</p>
+          </div>
+        </a>`;
+    })
+    .join('');
+
+  initScrollReveal(grid);
+}

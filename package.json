@@ -2,7 +2,8 @@
   "name": "swapio",
   "private": true,
   "scripts": {
+    "build": "python3 scripts/generate-articles.py",
     "dev": "wrangler pages dev . --compatibility-date=2024-06-19",
-    "deploy": "wrangler pages deploy . --project-name=swapio"
+    "deploy": "npm run build && wrangler pages deploy . --project-name=swapio"
   }
 }

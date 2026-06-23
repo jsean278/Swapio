@@ -53,6 +53,10 @@ function getSiteOrigin() {
   return 'https://swapio.cc';
 }
 
+function getArticleUrl(slug) {
+  return `/articles/${slug}`;
+}
+
 function setMeta(attr, key, value) {
   let el = document.querySelector(`meta[${attr}="${key}"]`);
   if (!el) {
@@ -67,7 +71,8 @@ function initSeo() {
   if (typeof window === 'undefined') return;
 
   const origin = getSiteOrigin();
-  const url = `${origin}${window.location.pathname}${window.location.search}`;
+  const canonicalLink = document.querySelector('link[rel="canonical"]');
+  const url = canonicalLink?.href || `${origin}${window.location.pathname}`;
 
   setMeta('property', 'og:url', url);
   setMeta('property', 'og:image', `${origin}${SWAPIO.logoPath}`);
@@ -172,7 +177,7 @@ function getHeader(activePage = '') {
     { href: '/index.html', label: 'Home', id: 'home' },
     { href: '/guide.html', label: 'Guide', id: 'guide' },
     { href: '/faq.html', label: 'FAQ', id: 'faq' },
-    { href: '/articles.html', label: 'Articles', id: 'articles' },
+    { href: '/articles/', label: 'Articles', id: 'articles' },
     { href: '/feedback.html', label: 'Feedback', id: 'feedback' },
     { href: '/contact.html', label: 'Reach Us', id: 'contact' },
   ];
@@ -252,7 +257,7 @@ function getFooter() {
             <ul class="footer-list">
               <li><a href="/guide.html" class="footer-link">Guide</a></li>
               <li><a href="/faq.html" class="footer-link">FAQ</a></li>
-              <li><a href="/articles.html" class="footer-link">Articles</a></li>
+              <li><a href="/articles/" class="footer-link">Articles</a></li>
               <li><a href="/feedback.html" class="footer-link">Feedback</a></li>
               <li><a href="/contact.html" class="footer-link">Reach Us</a></li>
             </ul>
