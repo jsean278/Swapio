@@ -244,13 +244,13 @@ def build_sitemap():
     static_pages = [
         (f'{SITE}/', 'weekly', '1.0'),
         (f'{SITE}/sell-gift-card/', 'monthly', '0.9'),
-        (f'{SITE}/guide.html', 'monthly', '0.8'),
-        (f'{SITE}/faq.html', 'monthly', '0.8'),
+        (f'{SITE}/guide', 'monthly', '0.8'),
+        (f'{SITE}/faq', 'monthly', '0.8'),
         (f'{SITE}/articles/', 'weekly', '0.8'),
-        (f'{SITE}/feedback.html', 'monthly', '0.7'),
-        (f'{SITE}/contact.html', 'monthly', '0.7'),
-        (f'{SITE}/terms.html', 'yearly', '0.4'),
-        (f'{SITE}/privacy.html', 'yearly', '0.4'),
+        (f'{SITE}/feedback', 'monthly', '0.7'),
+        (f'{SITE}/contact', 'monthly', '0.7'),
+        (f'{SITE}/terms', 'yearly', '0.4'),
+        (f'{SITE}/privacy', 'yearly', '0.4'),
     ]
 
     urls = static_pages + [
@@ -281,8 +281,16 @@ def build_redirects():
         '# Articles index',
         '/articles.html  /articles/  301',
         '',
+        '# Canonical static pages',
+        '/guide.html  /guide  301',
+        '/faq.html  /faq  301',
+        '/feedback.html  /feedback  301',
+        '/contact.html  /contact  301',
+        '/terms.html  /terms  301',
+        '/privacy.html  /privacy  301',
+        '',
         '# Legacy process page',
-        '/process.html  /guide.html  301',
+        '/process.html  /guide  301',
         '',
         '# Legacy article URLs → SEO-friendly paths (per-slug rules must come before catch-alls)',
     ]
