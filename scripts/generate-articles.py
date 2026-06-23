@@ -167,11 +167,11 @@ def build_article_page(slug, article):
   <link rel="canonical" href="{canonical}">
   <meta property="og:title" content="{esc(title)}">
   <meta property="og:description" content="{esc(description)}">
-  <meta property="og:type" content="article">
+  <meta property="og:type" content="website">
   <meta property="og:url" content="{canonical}">
   <meta property="og:image" content="{SITE}/assets/logo.png">
   <meta property="og:site_name" content="Swapio">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="{esc(title)}">
   <meta name="twitter:description" content="{esc(description)}">
   <meta name="twitter:image" content="{SITE}/assets/logo.png">

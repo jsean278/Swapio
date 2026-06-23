@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const feedbackEl = document.getElementById('feedback-preview');
   if (feedbackEl) feedbackEl.innerHTML = getFeedbackPreview(4);
 
+  initStatsCounters(statsEl);
   initScrollReveal(statsEl);
   initScrollReveal(trustEl);
   initScrollReveal(processEl);

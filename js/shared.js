@@ -30,11 +30,11 @@ const SWAPIO = {
     'IKEA', "Lowe's", 'Home Depot',
   ],
 
-  stats: {
-    cardsSwapped: '13,400+',
-    totalCashPaid: '$487K+',
-    activeSellers: '3,200+',
-  },
+  stats: [
+    { label: 'Cards Swapped', value: 13400, prefix: '', suffix: '+', format: 'number' },
+    { label: 'Total Cash Paid', value: 487, prefix: '$', suffix: 'K+', format: 'compact' },
+    { label: 'Active Sellers', value: 3200, prefix: '', suffix: '+', format: 'number' },
+  ],
 
   sellerReviews: [
     {
@@ -313,27 +313,92 @@ function getFooter() {
   `;
 }
 
+function formatStatValue(stat, amount) {
+  const rounded = Math.round(amount);
+  if (stat.format === 'compact') {
+    return `${stat.prefix}${rounded}${stat.suffix}`;
+  }
+  return `${stat.prefix}${rounded.toLocaleString('en-US')}${stat.suffix}`;
+}
+
 function getStatsBar() {
+  const cards = SWAPIO.stats
+    .map(
+      (stat) => `
+          <div class="scroll-reveal scroll-reveal--card rounded-2xl bg-white p-6">
+            <p
+              class="text-3xl md:text-4xl font-bold text-swapio-dark stat-counter"
+              data-stat-value="${stat.value}"
+              data-stat-prefix="${stat.prefix}"
+              data-stat-suffix="${stat.suffix}"
+              data-stat-format="${stat.format}"
+            >${stat.prefix}0${stat.suffix}</p>
+            <p class="text-gray-500 mt-1 text-sm">${stat.label}</p>
+          </div>`
+    )
+    .join('');
+
   return `
     <section class="stats-bar bg-white">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 stats-bar-inner">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
-          <div class="scroll-reveal scroll-reveal--card rounded-2xl bg-white p-6">
-            <p class="text-3xl md:text-4xl font-bold text-swapio-dark">${SWAPIO.stats.cardsSwapped}</p>
-            <p class="text-gray-500 mt-1 text-sm">Cards Swapped</p>
-          </div>
-          <div class="scroll-reveal scroll-reveal--card rounded-2xl bg-white p-6">
-            <p class="text-3xl md:text-4xl font-bold text-swapio-dark">${SWAPIO.stats.totalCashPaid}</p>
-            <p class="text-gray-500 mt-1 text-sm">Total Cash Paid</p>
-          </div>
-          <div class="scroll-reveal scroll-reveal--card rounded-2xl bg-white p-6">
-            <p class="text-3xl md:text-4xl font-bold text-swapio-dark">${SWAPIO.stats.activeSellers}</p>
-            <p class="text-gray-500 mt-1 text-sm">Active Sellers</p>
-          </div>
+          ${cards}
         </div>
       </div>
     </section>
   `;
+}
+
+function initStatsCounters(root = document) {
+  const counters = root.querySelectorAll('.stat-counter[data-stat-value]');
+  if (!counters.length) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const runCounter = (el) => {
+    const target = Number(el.dataset.statValue);
+    const stat = {
+      value: target,
+      prefix: el.dataset.statPrefix || '',
+      suffix: el.dataset.statSuffix || '',
+      format: el.dataset.statFormat || 'number',
+    };
+
+    if (!Number.isFinite(target) || prefersReducedMotion) {
+      el.textContent = formatStatValue(stat, target);
+      return;
+    }
+
+    const duration = 1400;
+    const startValue = performance.now();
+
+    const tick = (now) => {
+      const progress = Math.min((now - startValue) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = formatStatValue(stat, target * eased);
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        el.textContent = formatStatValue(stat, target);
+      }
+    };
+
+    requestAnimationFrame(tick);
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting || entry.target.dataset.statAnimated === 'true') return;
+        entry.target.dataset.statAnimated = 'true';
+        runCounter(entry.target);
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.35, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  counters.forEach((counter) => observer.observe(counter));
 }
 
 function getTrustSignals() {
