@@ -33,8 +33,41 @@ const SWAPIO = {
   stats: {
     cardsSwapped: '13,400+',
     totalCashPaid: '$487K+',
-    activeUsers: '3,200+',
+    activeSellers: '3,200+',
   },
+
+  sellerReviews: [
+    {
+      text: 'Had a $120 Amazon card I wasn\'t going to use. Submitted it around lunch and had $114 in my PayPal before dinner. Straightforward process with no surprises on the fee.',
+      name: 'Marcus T.',
+      meta: 'Amazon · PayPal',
+    },
+    {
+      text: 'I was skeptical at first, but seeing my exact offer before submitting made a big difference. Zelle payout hit the same day. Would use again.',
+      name: 'Priya K.',
+      meta: 'Target · Zelle',
+    },
+    {
+      text: 'Clean site, easy to follow. I swapped a Visa gift card from a work reward and got paid through Cash App. The order code made it easy to track everything.',
+      name: 'Jordan M.',
+      meta: 'Visa · Cash App',
+    },
+    {
+      text: 'Needed cash instead of another store card. Swapio showed the 5% fee upfront so I knew exactly what I\'d get. Venmo payout was quick after verification.',
+      name: 'Elena R.',
+      meta: 'Apple · Venmo',
+    },
+    {
+      text: 'Swapped two cards in one evening, a Steam card and a Walmart card. Same payout method for both, both paid out within hours. Simple and professional.',
+      name: 'David L.',
+      meta: 'Steam & Walmart · PayPal',
+    },
+    {
+      text: 'Better experience than other sites I\'ve tried. No pressure, clear steps, and support replied when I had a question about my order code. Solid service.',
+      name: 'Aisha N.',
+      meta: 'Best Buy · Bank Transfer',
+    },
+  ],
 };
 
 function generateOrderCode() {
@@ -294,8 +327,8 @@ function getStatsBar() {
             <p class="text-gray-500 mt-1 text-sm">Total Cash Paid</p>
           </div>
           <div class="scroll-reveal scroll-reveal--card rounded-2xl bg-white p-6">
-            <p class="text-3xl md:text-4xl font-bold text-swapio-dark">${SWAPIO.stats.activeUsers}</p>
-            <p class="text-gray-500 mt-1 text-sm">Active Users</p>
+            <p class="text-3xl md:text-4xl font-bold text-swapio-dark">${SWAPIO.stats.activeSellers}</p>
+            <p class="text-gray-500 mt-1 text-sm">Active Sellers</p>
           </div>
         </div>
       </div>
@@ -340,6 +373,46 @@ function getTrustSignals() {
             <h3 class="font-semibold text-swapio-dark mb-2">24/7 Support</h3>
             <p class="text-gray-500 text-sm leading-relaxed">Our team is here whenever you need help with your swap.</p>
           </div>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function getArticleBookIcon(className = 'article-card-book-icon') {
+  return `<img src="/assets/book.svg" alt="" class="${className}" width="48" height="48" aria-hidden="true">`;
+}
+
+function renderReviewCard(review) {
+  return `
+    <article class="review-card scroll-reveal scroll-reveal--card">
+      <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">"${review.text}"</p>
+      <div class="review-author">
+        <span class="review-name">${review.name}</span>
+        <span class="review-meta">${review.meta}</span>
+      </div>
+    </article>
+  `;
+}
+
+function getFeedbackPreview(limit = 4) {
+  const reviews = SWAPIO.sellerReviews.slice(0, limit).map(renderReviewCard).join('');
+  return `
+    <section class="py-16 bg-white">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+          <h2 class="text-2xl md:text-3xl font-bold text-swapio-dark scroll-reveal">Seller Feedback</h2>
+          <p class="text-gray-500 mt-3 max-w-xl mx-auto scroll-reveal">See what sellers say about swapping gift cards for cash with Swapio.</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          ${reviews}
+        </div>
+        <div class="text-center mt-8">
+          <a href="/feedback" class="text-swapio-dark font-medium hover:text-swapio-light transition-colors inline-flex items-center gap-1">
+            View more
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
     </section>
@@ -479,7 +552,7 @@ function initHeaderScroll() {
 function initPageAnimations() {
   const targets = Array.from(
     document.querySelectorAll(
-      'body > section, body > article, body > #stats-bar, body > #process-steps, body > #trust-signals'
+      'body > section, body > article, body > #stats-bar, body > #process-steps, body > #trust-signals, body > #feedback-preview'
     )
   ).filter((el) => !el.classList.contains('hidden'));
 

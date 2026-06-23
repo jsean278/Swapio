@@ -35,9 +35,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const processEl = document.getElementById('process-steps');
   if (processEl) processEl.innerHTML = getProcessSteps();
 
+  const feedbackEl = document.getElementById('feedback-preview');
+  if (feedbackEl) feedbackEl.innerHTML = getFeedbackPreview(4);
+
   initScrollReveal(statsEl);
   initScrollReveal(trustEl);
   initScrollReveal(processEl);
+  initScrollReveal(feedbackEl);
   initHomeSchema();
   updateGetOfferButton();
   initBrandFromUrl();
