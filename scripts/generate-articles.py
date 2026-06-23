@@ -177,7 +177,7 @@ def build_article_page(slug, article):
   <link rel="apple-touch-icon" href="/assets/logo.png">
   <title>{esc(title)}</title>
   <script type="application/ld+json">{json.dumps(article_schema)}</script>
-  <script type="application/ld+json">{json.dumps(org_schema)}</script>
+  <script id="swapio-org-schema" type="application/ld+json">{json.dumps(org_schema)}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -234,6 +234,7 @@ def build_article_page(slug, article):
 
   <script src="/js/auth.js"></script>
   <script src="/js/shared.js"></script>
+  <script src="/js/article-page.js"></script>
 </body>
 </html>
 '''
@@ -280,10 +281,10 @@ def build_redirects():
         '# Articles index',
         '/articles.html  /articles/  301',
         '',
-        '# Legacy article URLs → SEO-friendly paths (explicit per slug)',
-        '/article.html  /articles/  301',
-        '/article  /articles/  301',
+        '# Legacy process page',
+        '/process.html  /guide.html  301',
         '',
+        '# Legacy article URLs → SEO-friendly paths (per-slug rules must come before catch-alls)',
     ]
 
     for slug in sorted(ARTICLES):
@@ -291,7 +292,45 @@ def build_redirects():
         lines.append(f'/article.html?slug={slug}  {dest}  301')
         lines.append(f'/article?slug={slug}  {dest}  301')
 
+    lines.extend([
+        '',
+        '# Catch-all for article URLs without a slug',
+        '/article.html  /articles/  301',
+        '/article  /articles/  301',
+        '',
+    ])
+
     return '\n'.join(lines) + '\n'
+
+
+def verify_build():
+    errors = []
+    redirects = build_redirects().splitlines()
+    catch_all_idx = next(
+        (i for i, line in enumerate(redirects) if line.startswith('/article.html  ')),
+        -1,
+    )
+    slug_idx = next(
+        (i for i, line in enumerate(redirects) if '?slug=' in line),
+        -1,
+    )
+    if catch_all_idx != -1 and slug_idx != -1 and catch_all_idx < slug_idx:
+        errors.append('Redirect catch-alls must come after per-slug article rules')
+
+    for slug in ARTICLES:
+        page = os.path.join(ROOT, 'articles', slug, 'index.html')
+        if not os.path.exists(page):
+            errors.append(f'Missing article page: articles/{slug}/index.html')
+            continue
+        with open(page, 'r', encoding='utf-8') as f:
+            html = f.read()
+        if 'article-page.js' not in html:
+            errors.append(f'Missing article-page.js on articles/{slug}/index.html')
+        if 'id="site-header"' not in html:
+            errors.append(f'Missing site-header on articles/{slug}/index.html')
+
+    if errors:
+        raise SystemExit('Build verification failed:\n- ' + '\n- '.join(errors))
 
 
 def main():
@@ -310,6 +349,7 @@ def main():
     with open(os.path.join(ROOT, '_redirects'), 'w', encoding='utf-8') as f:
         f.write(build_redirects())
 
+    verify_build()
     print(f'Generated {count} article pages, sitemap.xml, and _redirects')
 
 

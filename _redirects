@@ -4,10 +4,10 @@
 # Articles index
 /articles.html  /articles/  301
 
-# Legacy article URLs → SEO-friendly paths (explicit per slug)
-/article.html  /articles/  301
-/article  /articles/  301
+# Legacy process page
+/process.html  /guide.html  301
 
+# Legacy article URLs → SEO-friendly paths (per-slug rules must come before catch-alls)
 /article.html?slug=after-you-submit  /articles/after-you-submit/  301
 /article?slug=after-you-submit  /articles/after-you-submit/  301
 /article.html?slug=best-cash-value-gift-cards  /articles/best-cash-value-gift-cards/  301
@@ -32,3 +32,8 @@
 /article?slug=sell-visa-gift-card-for-cash  /articles/sell-visa-gift-card-for-cash/  301
 /article.html?slug=venmo-bitcoin-payouts  /articles/venmo-bitcoin-payouts/  301
 /article?slug=venmo-bitcoin-payouts  /articles/venmo-bitcoin-payouts/  301
+
+# Catch-all for article URLs without a slug
+/article.html  /articles/  301
+/article  /articles/  301
+

@@ -73,10 +73,6 @@ const ARTICLE_SEO = {
   },
 };
 
-function getArticleUrl(slug) {
-  return `/articles/${slug}/`;
-}
-
 function getMergedArticle(slug) {
   const article = ARTICLES[slug];
   const seo = ARTICLE_SEO[slug];

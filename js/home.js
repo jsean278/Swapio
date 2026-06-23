@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const processEl = document.getElementById('process-steps');
   if (processEl) processEl.innerHTML = getProcessSteps();
 
-  initPageAnimations();
   initScrollReveal(statsEl);
   initScrollReveal(trustEl);
   initScrollReveal(processEl);
@@ -82,7 +81,7 @@ function initSellPage() {
   const saved = loadSwapSession();
   if (!isValidSwapSession(saved)) {
     clearSwapSession();
-    window.location.replace('/index.html');
+    window.location.replace('/');
     return;
   }
 
@@ -392,7 +391,7 @@ function resetSwapFlow() {
   clearSwapSession();
 
   if (document.body.dataset.page === 'sell') {
-    window.location.href = '/index.html';
+    window.location.href = '/';
     return;
   }
 

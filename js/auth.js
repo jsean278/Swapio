@@ -55,12 +55,16 @@ function bindSignOutButtons() {
     btn.dataset.signOutBound = '1';
     btn.addEventListener('click', async () => {
       await logoutUser();
-      window.location.href = '/index.html';
+      window.location.href = '/';
     });
   });
 }
 
 async function initAuth() {
+  if (authChecked) {
+    updateAuthNav();
+    return currentUser;
+  }
   await fetchCurrentUser();
   authChecked = true;
   updateAuthNav();

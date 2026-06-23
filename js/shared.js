@@ -174,7 +174,7 @@ function isValidSwapSession(saved) {
 
 function getHeader(activePage = '') {
   const navItems = [
-    { href: '/index.html', label: 'Home', id: 'home' },
+    { href: '/', label: 'Home', id: 'home' },
     { href: '/guide.html', label: 'Guide', id: 'guide' },
     { href: '/faq.html', label: 'FAQ', id: 'faq' },
     { href: '/articles/', label: 'Articles', id: 'articles' },
