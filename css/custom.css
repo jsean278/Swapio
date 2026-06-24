@@ -130,7 +130,6 @@ body {
   display: block;
   flex-shrink: 0;
   object-fit: cover;
-  border-radius: 1.125rem;
 }
 
 .site-logo {

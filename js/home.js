@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal(trustEl);
   initScrollReveal(processEl);
   initScrollReveal(feedbackEl);
-  initHomeSchema();
   updateGetOfferButton();
   initBrandFromUrl();
 });
@@ -54,20 +53,6 @@ function resetHomeScroll() {
     history.scrollRestoration = 'manual';
   }
   window.scrollTo(0, 0);
-}
-
-function initHomeSchema() {
-  const script = document.createElement('script');
-  script.type = 'application/ld+json';
-  script.textContent = JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'Swapio',
-    url: getSiteOrigin(),
-    description: 'Turn unused gift cards into cash fast. 95% payout, 60+ brands accepted.',
-    publisher: { '@type': 'Organization', name: 'Swapio' },
-  });
-  document.head.appendChild(script);
 }
 
 function getSwapSteps() {

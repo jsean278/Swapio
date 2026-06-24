@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initLayout(page);
   initFaqAccordion();
   initContactForm();
-  initFaqSchema();
 
   document.querySelectorAll('[data-validate="email"]').forEach((el) => {
     setupEmailValidation(el);
@@ -30,35 +29,6 @@ function initFaqAccordion() {
       }
     });
   });
-}
-
-function initFaqSchema() {
-  if (document.body.dataset.page !== 'faq') return;
-
-  const items = Array.from(document.querySelectorAll('.faq-item')).map((item) => {
-    const question = item.querySelector('.faq-question')?.textContent?.trim();
-    const answer = item.querySelector('.faq-answer p')?.textContent?.trim();
-    if (!question || !answer) return null;
-    return {
-      '@type': 'Question',
-      name: question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: answer,
-      },
-    };
-  }).filter(Boolean);
-
-  if (!items.length) return;
-
-  const script = document.createElement('script');
-  script.type = 'application/ld+json';
-  script.textContent = JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: items,
-  });
-  document.head.appendChild(script);
 }
 
 function initContactForm() {

@@ -4,9 +4,9 @@ const SWAPIO = {
   siteName: 'Swapio',
   siteUrl: 'https://swapio.cc',
   logoPath: '/assets/logo.png',
-  ogImagePath: '/assets/logo-512.png',
-  faviconPath: '/assets/logo-32.png',
-  appleTouchIconPath: '/assets/logo-180.png',
+  ogImagePath: '/assets/logo.png',
+  faviconPath: '/assets/logo.png',
+  appleTouchIconPath: '/assets/logo.png',
   supportEmail: 'support@swapio.cc',
 
   seoKeywords: [
@@ -282,11 +282,11 @@ function isValidSwapSession(saved) {
 function getHeader(activePage = '') {
   const navItems = [
     { href: '/', label: 'Home', id: 'home' },
-    { href: '/guide.html', label: 'Guide', id: 'guide' },
-    { href: '/faq.html', label: 'FAQ', id: 'faq' },
+    { href: '/guide', label: 'Guide', id: 'guide' },
+    { href: '/faq', label: 'FAQ', id: 'faq' },
     { href: '/articles/', label: 'Articles', id: 'articles' },
-    { href: '/feedback.html', label: 'Feedback', id: 'feedback' },
-    { href: '/contact.html', label: 'Reach Us', id: 'contact' },
+    { href: '/feedback', label: 'Feedback', id: 'feedback' },
+    { href: '/contact', label: 'Reach Us', id: 'contact' },
   ];
 
   const navBtnClass = (id) =>
@@ -362,19 +362,19 @@ function getFooter() {
           <div class="footer-col">
             <h4 class="footer-heading">Explore</h4>
             <ul class="footer-list">
-              <li><a href="/guide.html" class="footer-link">Guide</a></li>
-              <li><a href="/faq.html" class="footer-link">FAQ</a></li>
+              <li><a href="/guide" class="footer-link">Guide</a></li>
+              <li><a href="/faq" class="footer-link">FAQ</a></li>
               <li><a href="/articles/" class="footer-link">Articles</a></li>
-              <li><a href="/feedback.html" class="footer-link">Feedback</a></li>
-              <li><a href="/contact.html" class="footer-link">Reach Us</a></li>
+              <li><a href="/feedback" class="footer-link">Feedback</a></li>
+              <li><a href="/contact" class="footer-link">Reach Us</a></li>
             </ul>
           </div>
 
           <div class="footer-col">
             <h4 class="footer-heading">Legal</h4>
             <ul class="footer-list">
-              <li><a href="/terms.html" class="footer-link">Terms of Service</a></li>
-              <li><a href="/privacy.html" class="footer-link">Privacy Policy</a></li>
+              <li><a href="/terms" class="footer-link">Terms of Service</a></li>
+              <li><a href="/privacy" class="footer-link">Privacy Policy</a></li>
             </ul>
           </div>
         </div>

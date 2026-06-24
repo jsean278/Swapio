@@ -3,7 +3,7 @@ import json
 import os
 import re
 import xml.etree.ElementTree as ET
-from datetime import date
+from datetime import date, datetime, timezone
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = 'https://swapio.cc'
@@ -169,16 +169,15 @@ def build_article_page(slug, article):
   <meta property="og:description" content="{esc(description)}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="{canonical}">
-  <meta property="og:image" content="{SITE}/assets/logo-512.png">
+  <meta property="og:image" content="{SITE}/assets/logo.png">
   <meta property="og:site_name" content="Swapio">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="{esc(title)}">
   <meta name="twitter:description" content="{esc(description)}">
-  <meta name="twitter:image" content="{SITE}/assets/logo-512.png">
-  <link rel="icon" href="/assets/logo-32.png" type="image/png" sizes="32x32">
-  <link rel="icon" href="/assets/logo-180.png" type="image/png" sizes="180x180">
-  <link rel="apple-touch-icon" href="/assets/logo-180.png" sizes="180x180">
+  <meta name="twitter:image" content="{SITE}/assets/logo.png">
+  <link rel="icon" href="/assets/logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/logo.png">
   <title>{esc(title)}</title>
   <script type="application/ld+json">{json.dumps(article_schema)}</script>
   <script id="swapio-org-schema" type="application/ld+json">{json.dumps(org_schema)}</script>
@@ -245,7 +244,7 @@ def build_article_page(slug, article):
 
 
 def build_sitemap():
-    today = date.today().isoformat()
+    today = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S+00:00')
     static_pages = [
         (f'{SITE}/', 'weekly', '1.0'),
         (f'{SITE}/sell-gift-card/', 'monthly', '0.9'),
@@ -423,6 +422,12 @@ def main():
         f.write(build_redirects())
 
     verify_build()
+
+    import subprocess
+    inject_script = os.path.join(ROOT, 'scripts', 'inject-seo-static.py')
+    if os.path.exists(inject_script):
+        subprocess.run(['python3', inject_script], check=True)
+
     print(f'Generated {count} article pages, functions/sitemap.xml.js, and _redirects')
 
 
