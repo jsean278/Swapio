@@ -111,20 +111,13 @@ body {
   border-bottom: 1px solid var(--swapio-divider);
 }
 
-.site-brand-row {
-  display: flex;
-  justify-content: center;
-  padding-top: 0.75rem;
-}
-
 .site-brand {
   text-decoration: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 
 .site-brand:hover {
-  opacity: 0.9;
-  transform: scale(1.02);
+  opacity: 0.85;
 }
 
 .site-name {
@@ -137,40 +130,23 @@ body {
   display: block;
   flex-shrink: 0;
   object-fit: cover;
-  border-radius: 1.375rem;
+  border-radius: 1.125rem;
 }
 
 .site-logo {
-  height: 4.5rem;
-  width: 4.5rem;
-}
-
-@media (min-width: 768px) {
-  .site-logo {
-    height: 5rem;
-    width: 5rem;
-    border-radius: 1.5rem;
-  }
+  height: 2.5rem;
+  width: 2.5rem;
 }
 
 .site-logo--footer {
-  height: 3rem;
-  width: 3rem;
+  height: 2.25rem;
+  width: 2.25rem;
 }
 
 .swapio-logo {
-  width: 5rem;
-  height: 5rem;
+  width: 3.5rem;
+  height: 3.5rem;
   margin: 0 auto 1rem;
-  border-radius: 1.5rem;
-}
-
-@media (min-width: 768px) {
-  .swapio-logo {
-    width: 6rem;
-    height: 6rem;
-    border-radius: 1.625rem;
-  }
 }
 
 .site-header:not(.auth-ready) .auth-nav-slot {

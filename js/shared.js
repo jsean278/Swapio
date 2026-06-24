@@ -304,12 +304,7 @@ function getHeader(activePage = '') {
   return `
     <header class="site-header sticky top-0 z-50 bg-white transition-shadow duration-300">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 site-header-inner">
-        <div class="site-brand-row">
-          <a href="/" class="site-brand" aria-label="Swapio home">
-            <img src="${SWAPIO.logoPath}" alt="Swapio" class="site-logo" width="72" height="72">
-          </a>
-        </div>
-        <div class="relative flex items-center justify-center h-14 md:h-16">
+        <div class="relative flex items-center justify-center h-16 md:h-18">
           <nav class="hidden md:flex items-center gap-2 flex-wrap justify-center" aria-label="Main navigation">
             ${navLinks}
             <span class="auth-nav-slot inline-flex items-center gap-2">
