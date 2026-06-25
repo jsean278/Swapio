@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Account and auth pages — also blocked via noindex meta + X-Robots-Tag
+Disallow: /login
+Disallow: /login.html
+Disallow: /signup
+Disallow: /signup.html
+Disallow: /dashboard
+Disallow: /dashboard.html
+
+Sitemap: https://swapio.cc/sitemap.xml
+
+# IndexNow key: https://swapio.cc/b8e4d0f3c2a5167b.txt
