@@ -12,6 +12,6 @@ Disallow: /signup.html
 Disallow: /dashboard
 Disallow: /dashboard.html
 
-Sitemap: https://swapio.cc/sitemap.xml
+Sitemap: https://swapio.cc/sitemap_index.xml
 
 # IndexNow key: https://swapio.cc/b8e4d0f3c2a5167b.txt

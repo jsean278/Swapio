@@ -1,5 +1,7 @@
 # Sitemap canonical URL
-/sitemap.xml/  /sitemap.xml  301
+/sitemap_index.xml/  /sitemap_index.xml  301
+/sitemap.xml  /sitemap_index.xml  301
+/sitemap.xml/  /sitemap_index.xml  301
 
 # Canonical homepage
 /index.html  /  301

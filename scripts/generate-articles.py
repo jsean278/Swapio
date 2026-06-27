@@ -300,7 +300,9 @@ export async function onRequest() {{
 def build_redirects():
     lines = [
         '# Sitemap canonical URL',
-        '/sitemap.xml/  /sitemap.xml  301',
+        '/sitemap_index.xml/  /sitemap_index.xml  301',
+        '/sitemap.xml  /sitemap_index.xml  301',
+        '/sitemap.xml/  /sitemap_index.xml  301',
         '',
         '# Canonical homepage',
         '/index.html  /  301',
@@ -364,18 +366,18 @@ def verify_build():
         if 'id="site-header"' not in html:
             errors.append(f'Missing site-header on articles/{slug}/index.html')
 
-    sitemap_path = os.path.join(ROOT, 'functions', 'sitemap.xml.js')
+    sitemap_path = os.path.join(ROOT, 'functions', 'sitemap_index.xml.js')
     if not os.path.exists(sitemap_path):
-        errors.append('Missing functions/sitemap.xml.js')
+        errors.append('Missing functions/sitemap_index.xml.js')
     else:
         with open(sitemap_path, 'r', encoding='utf-8') as f:
             source = f.read()
         if 'SITEMAP_XML' not in source:
-            errors.append('functions/sitemap.xml.js is missing SITEMAP_XML payload')
+            errors.append('functions/sitemap_index.xml.js is missing SITEMAP_XML payload')
         xml_start = source.find('<?xml')
         xml_end = source.find('</urlset>', xml_start)
         if xml_start == -1 or xml_end == -1:
-            errors.append('functions/sitemap.xml.js does not embed sitemap XML')
+            errors.append('functions/sitemap_index.xml.js does not embed sitemap XML')
         else:
             xml = source[xml_start:xml_end + len('</urlset>')]
             if xml.startswith('\ufeff'):
@@ -412,10 +414,10 @@ def main():
 
     functions_dir = os.path.join(ROOT, 'functions')
     os.makedirs(functions_dir, exist_ok=True)
-    with open(os.path.join(functions_dir, 'sitemap.xml.js'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(functions_dir, 'sitemap_index.xml.js'), 'w', encoding='utf-8') as f:
         f.write(build_sitemap_function())
 
-    static_sitemap = os.path.join(ROOT, 'sitemap.xml')
+    static_sitemap = os.path.join(ROOT, 'sitemap_index.xml')
     if os.path.exists(static_sitemap):
         os.remove(static_sitemap)
 
@@ -429,7 +431,7 @@ def main():
     if os.path.exists(inject_script):
         subprocess.run(['python3', inject_script], check=True)
 
-    print(f'Generated {count} article pages, functions/sitemap.xml.js, and _redirects')
+    print(f'Generated {count} article pages, functions/sitemap_index.xml.js, and _redirects')
 
 
 if __name__ == '__main__':
