@@ -733,13 +733,33 @@ function loadSupportChat() {
 
   if (document.querySelector('script[data-support-chat]')) return;
 
-  const script = document.createElement('script');
-  script.src = '/js/support-chat.js';
-  script.dataset.supportChat = 'true';
-  script.onload = () => {
+  const initChat = () => {
     if (typeof initSupportChat === 'function') initSupportChat();
   };
-  document.body.appendChild(script);
+
+  const loadChatScript = () => {
+    const script = document.createElement('script');
+    script.src = '/js/support-chat.js';
+    script.dataset.supportChat = 'true';
+    script.onload = initChat;
+    document.body.appendChild(script);
+  };
+
+  if (typeof getCardRequirements === 'function') {
+    loadChatScript();
+    return;
+  }
+
+  if (document.querySelector('script[data-card-requirements]')) {
+    loadChatScript();
+    return;
+  }
+
+  const reqScript = document.createElement('script');
+  reqScript.src = '/js/card-requirements.js';
+  reqScript.dataset.cardRequirements = 'true';
+  reqScript.onload = loadChatScript;
+  document.body.appendChild(reqScript);
 }
 
 function initLayout(activePage = '') {

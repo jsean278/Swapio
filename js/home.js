@@ -97,21 +97,10 @@ function initSellPage() {
 }
 
 function initSellAccountNotice() {
-  const notice = document.getElementById('account-notice');
-  if (!notice) return;
-
   waitForAuth().then((user) => {
-    notice.classList.remove('hidden');
-    if (user) {
-      notice.className = 'account-notice account-notice--success';
-      notice.innerHTML = `Logged in as <strong>${user.username}</strong>. This submission will appear on your <a href="/dashboard" class="text-swapio-dark underline font-semibold">dashboard</a>.`;
-
-      const emailInput = document.getElementById('email');
-      if (emailInput && !emailInput.value) emailInput.value = user.email;
-    } else {
-      notice.className = 'account-notice account-notice--info';
-      notice.innerHTML = `<a href="/login" class="text-swapio-dark underline font-semibold">Log in</a> or <a href="/signup" class="text-swapio-dark underline font-semibold">sign up</a> to track this submission on your dashboard. Guest submissions still work — they just won't be saved to an account.`;
-    }
+    if (!user) return;
+    const emailInput = document.getElementById('email');
+    if (emailInput && !emailInput.value) emailInput.value = user.email;
   });
 }
 
@@ -179,11 +168,6 @@ function renderCardFields() {
 
   const req = getCardRequirements(swapState.brand);
   container.innerHTML = `
-    <div class="card-requirements-box">
-      <p class="card-requirements-brand">${swapState.brand} · ${req.label}</p>
-      ${req.hint ? `<p class="card-requirements-hint">${req.hint}</p>` : ''}
-      ${req.note ? `<p class="card-requirements-note">${req.note}</p>` : ''}
-    </div>
     ${req.fields.map((field) => `
       <div class="field-wrapper">
         <label class="form-label" for="card-${field.name}">${field.label}${field.required ? ' <span class="text-red-500">*</span>' : ''}</label>
@@ -497,14 +481,9 @@ function initSubmissionForm() {
         `${formatCurrency(payout)} via ${swapState.payoutMethod}`;
 
       const trackedNote = document.getElementById('success-tracked-note');
-      if (trackedNote) {
-        if (result.tracked) {
-          trackedNote.innerHTML = 'This swap is saved to your <a href="/dashboard" class="text-swapio-dark underline font-semibold">dashboard</a>.';
-          trackedNote.classList.remove('hidden');
-        } else {
-          trackedNote.textContent = 'Log in before submitting to track swaps on your dashboard.';
-          trackedNote.classList.remove('hidden');
-        }
+      if (trackedNote && result.tracked) {
+        trackedNote.innerHTML = 'This swap is saved to your <a href="/dashboard" class="text-swapio-dark underline font-semibold">dashboard</a>.';
+        trackedNote.classList.remove('hidden');
       }
 
       clearSwapSession();
