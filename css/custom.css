@@ -677,6 +677,33 @@ body {
   font-weight: 500;
 }
 
+.card-requirements-box {
+  padding: 0.875rem 1rem;
+  border-radius: 0.75rem;
+  background: rgba(120, 165, 211, 0.1);
+  border: 1px solid rgba(45, 70, 123, 0.12);
+}
+
+.card-requirements-brand {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #2D467B;
+  margin-bottom: 0.25rem;
+}
+
+.card-requirements-hint {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: #4b5563;
+}
+
+.card-requirements-note {
+  margin-top: 0.375rem;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: #6b7280;
+}
+
 .field-error.hidden {
   display: none;
 }

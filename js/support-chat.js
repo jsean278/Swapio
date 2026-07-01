@@ -24,6 +24,20 @@ function includesAny(text, terms) {
   return terms.some((term) => text.includes(term));
 }
 
+function isTrustQuestion(text) {
+  const trustPatterns = [
+    'scam', 'legit', 'legitimate', 'fake', 'sketchy', 'sketch', 'fraud', 'ripoff', 'rip off',
+    'trustworthy', 'can i trust', 'is this real', 'is swapio real', 'are you real',
+    'is this safe', 'is it safe', 'too good to be true', 'pyramid', 'ponzi',
+    'steal', 'stolen', 'rob me', 'cheat', 'cheating', 'suspicious', 'con artist',
+    'is this legit', 'not a scam', 'no scam', 'actually legit', 'actually real',
+  ];
+
+  if (includesAny(text, trustPatterns)) return true;
+
+  return /^(is this|are you|this|swapio)?\s*(a\s+)?(scam|fake|legit|real|safe)\??$/.test(text);
+}
+
 function formatBrandList(limit = 12) {
   const brands = SWAPIO.giftCards.slice(0, limit);
   return `${brands.join(', ')}, and more`;
@@ -67,6 +81,10 @@ function generateSupportReply(message) {
     return "You're welcome! Let me know if anything else comes up. You can start a swap on the homepage or at /sell-gift-card/ whenever you're ready.";
   }
 
+  if (isTrustQuestion(text)) {
+    return `No — Swapio is not a scam. We're a legitimate gift-card cash-out service. You see your exact payout (${SWAPIO.payoutPercent}%) and fees upfront before you submit anything. All submissions use encrypted HTTPS, every card is verified before payout, and you get an order code (SWP-XXXXXX) right away. We never sell your personal information. Read more on our FAQ at /faq or email ${SWAPIO.supportEmail} if you still have concerns.`;
+  }
+
   if (includesAny(text, ['contact', 'email', 'reach', 'human', 'real person', 'talk to someone', 'speak to'])) {
     return `You can reach the team at ${SWAPIO.supportEmail} or through our Reach Us page at /contact. Include your order code (SWP-XXXXXX) if you have an active swap.`;
   }
@@ -83,12 +101,24 @@ function generateSupportReply(message) {
     return "Most swaps are verified and paid within a day. You'll get an order code (SWP-XXXXXX) right after submitting. Occasionally it may take a little longer if verification needs a closer look.";
   }
 
-  if (includesAny(text, ['safe', 'scam', 'legit', 'trust', 'secure', 'verify', 'verification'])) {
-    return 'Every card is verified before payout. Submissions use encrypted HTTPS, your exact offer is shown upfront, and we do not sell your personal information.';
+  if (includesAny(text, ['secure', 'security', 'encrypted', 'https', 'privacy', 'data'])) {
+    return 'All submissions use encrypted HTTPS. Your exact offer is shown before you commit, every card is verified before payout, and we do not sell your personal information. See /privacy for details.';
+  }
+
+  if (includesAny(text, ['card verification', 'verify my card', 'how do you verify', 'verification process', 'why verify', 'what is verification'])) {
+    return 'We verify every gift card before sending your payout — checking balance, validity, and that it has not already been redeemed. This protects both you and us. Most verified swaps pay out within a day.';
   }
 
   if (includesAny(text, ['minimum', 'maximum', 'limit', 'balance', '$10', '$5000', '10 dollar', '5000'])) {
     return 'Accepted balances range from $10 to $5,000. Enter your amount on the homepage to see your exact offer before committing.';
+  }
+
+  if (includesAny(text, ['discord', 'nitro', 'gift link'])) {
+    return 'Discord Nitro gifts use a gift link (like https://discord.gift/...), not a redemption code. Paste the full link from your email when submitting.';
+  }
+
+  if (includesAny(text, ['what do i need', 'what info', 'card number', 'pin', 'redemption', 'submit', 'requirements', 'claim code', 'what to enter'])) {
+    return 'Required info depends on the brand: retail cards need card number + PIN, Amazon needs a claim code, Visa/Mastercard need card number + expiry + CVV, Discord Nitro needs a gift link, Steam/PlayStation/Xbox need digital codes, and Riot/Valorant need a Riot Access Code. The sell form shows exactly what your brand needs.';
   }
 
   if (includesAny(text, ['brand', 'accept', 'which card', 'what card', 'amazon', 'apple', 'steam', 'visa', 'gift card'])) {
@@ -104,7 +134,7 @@ function generateSupportReply(message) {
   }
 
   if (includesAny(text, ['account', 'dashboard', 'log in', 'login', 'sign up', 'signup', 'register'])) {
-    return 'You can create a free account to track submissions at /dashboard.html, but it is optional — you can swap without one and use your order code to follow up.';
+    return 'You can create a free account to track submissions at /dashboard, but it is optional — you can swap without one and use your order code to follow up.';
   }
 
   if (includesAny(text, ['what is swapio', 'about swapio', 'who is swapio', 'swapio'])) {

@@ -323,10 +323,10 @@ function getHeader(activePage = '') {
             ${navLinks}
             <span class="auth-nav-slot inline-flex items-center gap-2">
               <span id="auth-nav-guest" class="hidden inline-flex items-center gap-2">
-                <a href="/login.html" class="nav-btn nav-btn-accent">Log In</a>
+                <a href="/login" class="nav-btn nav-btn-accent">Log In</a>
               </span>
               <span id="auth-nav-user" class="hidden inline-flex items-center gap-2">
-                <a href="/dashboard.html" id="auth-dashboard-link" class="${dashboardNavClass}">Dashboard</a>
+                <a href="/dashboard" id="auth-dashboard-link" class="${dashboardNavClass}">Dashboard</a>
                 <button type="button" data-sign-out class="nav-btn nav-btn-signout">Sign Out</button>
               </span>
             </span>
@@ -354,10 +354,10 @@ function getHeader(activePage = '') {
             .join('')}
           <span class="auth-nav-slot flex flex-col gap-2">
             <span id="auth-nav-guest-mobile" class="hidden flex flex-col gap-2">
-              <a href="/login.html" class="nav-btn nav-btn-accent w-full text-center">Log In</a>
+              <a href="/login" class="nav-btn nav-btn-accent w-full text-center">Log In</a>
             </span>
             <span id="auth-nav-user-mobile" class="hidden flex flex-col gap-2">
-              <a href="/dashboard.html" class="${dashboardNavClass} w-full text-center">Dashboard</a>
+              <a href="/dashboard" class="${dashboardNavClass} w-full text-center">Dashboard</a>
               <button type="button" data-sign-out class="nav-btn nav-btn-signout w-full text-center">Sign Out</button>
             </span>
           </span>
@@ -607,7 +607,7 @@ function getProcessSteps() {
           </div>
         </div>
         <div class="text-center mt-10">
-          <a href="/guide.html" class="text-swapio-dark font-medium hover:text-swapio-light transition-colors inline-flex items-center gap-1">
+          <a href="/guide" class="text-swapio-dark font-medium hover:text-swapio-light transition-colors inline-flex items-center gap-1">
             Read the full guide
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </a>

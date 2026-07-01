@@ -104,13 +104,13 @@ function initSellAccountNotice() {
     notice.classList.remove('hidden');
     if (user) {
       notice.className = 'account-notice account-notice--success';
-      notice.innerHTML = `Logged in as <strong>${user.username}</strong>. This submission will appear on your <a href="/dashboard.html" class="text-swapio-dark underline font-semibold">dashboard</a>.`;
+      notice.innerHTML = `Logged in as <strong>${user.username}</strong>. This submission will appear on your <a href="/dashboard" class="text-swapio-dark underline font-semibold">dashboard</a>.`;
 
       const emailInput = document.getElementById('email');
       if (emailInput && !emailInput.value) emailInput.value = user.email;
     } else {
       notice.className = 'account-notice account-notice--info';
-      notice.innerHTML = `<a href="/login.html" class="text-swapio-dark underline font-semibold">Log in</a> or <a href="/signup.html" class="text-swapio-dark underline font-semibold">sign up</a> to track this submission on your dashboard. Guest submissions still work — they just won't be saved to an account.`;
+      notice.innerHTML = `<a href="/login" class="text-swapio-dark underline font-semibold">Log in</a> or <a href="/signup" class="text-swapio-dark underline font-semibold">sign up</a> to track this submission on your dashboard. Guest submissions still work — they just won't be saved to an account.`;
     }
   });
 }
@@ -179,6 +179,11 @@ function renderCardFields() {
 
   const req = getCardRequirements(swapState.brand);
   container.innerHTML = `
+    <div class="card-requirements-box">
+      <p class="card-requirements-brand">${swapState.brand} · ${req.label}</p>
+      ${req.hint ? `<p class="card-requirements-hint">${req.hint}</p>` : ''}
+      ${req.note ? `<p class="card-requirements-note">${req.note}</p>` : ''}
+    </div>
     ${req.fields.map((field) => `
       <div class="field-wrapper">
         <label class="form-label" for="card-${field.name}">${field.label}${field.required ? ' <span class="text-red-500">*</span>' : ''}</label>
@@ -188,8 +193,9 @@ function renderCardFields() {
           name="${field.name}"
           class="form-input"
           placeholder="${field.placeholder}"
-          ${field.required ? `data-validate="required" data-error-message="Please enter ${field.label.toLowerCase()}"` : ''}
+          ${field.required ? `data-validate="${field.validate || 'required'}" data-error-message="Please enter a valid ${field.label.toLowerCase()}"` : ''}
           ${field.inputMode ? `inputmode="${field.inputMode}"` : ''}
+          ${field.validate === 'url' || field.validate === 'codeOrLink' ? 'autocapitalize="off" autocorrect="off" spellcheck="false"' : ''}
         >
       </div>
     `).join('')}
@@ -478,7 +484,7 @@ function initSubmissionForm() {
       payoutAccount: formatPayoutAccount(payoutDetails),
       payoutDetails,
       cardDetails,
-      cardNumber: cardDetails.cardNumber || cardDetails.claimCode || cardDetails.redemptionCode || cardDetails.giftCode || cardDetails.cardCode || cardDetails.pin || '',
+      cardNumber: cardDetails.cardNumber || cardDetails.giftLink || cardDetails.claimCode || cardDetails.redemptionCode || cardDetails.giftCode || cardDetails.cardCode || cardDetails.pin || '',
       securityPin: cardDetails.pin || cardDetails.cvv || '',
       timestamp: new Date().toISOString(),
     };
@@ -493,7 +499,7 @@ function initSubmissionForm() {
       const trackedNote = document.getElementById('success-tracked-note');
       if (trackedNote) {
         if (result.tracked) {
-          trackedNote.innerHTML = 'This swap is saved to your <a href="/dashboard.html" class="text-swapio-dark underline font-semibold">dashboard</a>.';
+          trackedNote.innerHTML = 'This swap is saved to your <a href="/dashboard" class="text-swapio-dark underline font-semibold">dashboard</a>.';
           trackedNote.classList.remove('hidden');
         } else {
           trackedNote.textContent = 'Log in before submitting to track swaps on your dashboard.';

@@ -140,7 +140,7 @@ const ARTICLES = {
       <p>That's it. The amount shown in your original offer — 95% of your card balance — arrives in your account. No surprises, no hidden deductions.</p>
 
       <h2>What if something goes wrong?</h2>
-      <p>If your card can't be verified (invalid, already redeemed, etc.), we'll reach out via the email you provided. You can also contact us through the <a href="/contact.html">Reach Us</a> page with your order code.</p>
+      <p>If your card can't be verified (invalid, already redeemed, etc.), we'll reach out via the email you provided. You can also contact us through the <a href="/contact">Reach Us</a> page with your order code.</p>
 
       <h2>Timeline summary</h2>
       <ul>
@@ -276,7 +276,7 @@ const ARTICLES = {
         <li>Encrypted submissions on every page</li>
         <li>Cards verified before any payout is sent</li>
         <li>Order codes (SWP-XXXXXX) for every submission</li>
-        <li>Support available through our <a href="/contact.html">Reach Us</a> page</li>
+        <li>Support available through our <a href="/contact">Reach Us</a> page</li>
       </ul>
 
       <p>Stay skeptical, read the offer, and only submit when you're comfortable. If something feels off, it probably is.</p>
@@ -346,7 +346,7 @@ const ARTICLES = {
       </ul>
 
       <h2>Still waiting?</h2>
-      <p>Contact us through the <a href="/contact.html">Reach Us</a> page with your order code. We'll look into it and get back to you quickly.</p>
+      <p>Contact us through the <a href="/contact">Reach Us</a> page with your order code. We'll look into it and get back to you quickly.</p>
     `,
   },
 

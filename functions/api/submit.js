@@ -219,6 +219,7 @@ function formatCardDetails(details) {
     redemptionCode: 'Redemption Code',
     giftCode: 'Gift Code',
     cardCode: 'Card Code',
+    giftLink: 'Gift Link',
   };
 
   return Object.entries(details)

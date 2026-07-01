@@ -17,7 +17,7 @@ function initLoginPage() {
   if (!form) return;
 
   if (isAuthenticated()) {
-    window.location.replace('/dashboard.html');
+    window.location.replace('/dashboard');
     return;
   }
 
@@ -45,7 +45,7 @@ function initLoginPage() {
 
     try {
       await loginUser(email, password);
-      window.location.href = '/dashboard.html';
+      window.location.href = '/dashboard';
     } catch (err) {
       showAuthError('login-error', err.message);
     } finally {
@@ -60,7 +60,7 @@ function initSignupPage() {
   if (!form) return;
 
   if (isAuthenticated()) {
-    window.location.replace('/dashboard.html');
+    window.location.replace('/dashboard');
     return;
   }
 
@@ -89,7 +89,7 @@ function initSignupPage() {
 
     try {
       await signupUser(username, email, password);
-      window.location.href = '/dashboard.html';
+      window.location.href = '/dashboard';
     } catch (err) {
       showAuthError('signup-error', err.message);
     } finally {

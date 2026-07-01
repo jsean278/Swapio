@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   await initAuth();
 
   if (!isAuthenticated()) {
-    window.location.replace('/login.html');
+    window.location.replace('/login');
     return;
   }
 

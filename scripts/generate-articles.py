@@ -95,7 +95,7 @@ def normalize_content(html):
     return (
         html.replace('href="index.html#swap"', 'href="/sell-gift-card/"')
         .replace('href="index.html"', 'href="/"')
-        .replace('href="contact.html"', 'href="/contact.html"')
+        .replace('href="contact.html"', 'href="/contact"')
         .strip()
     )
 
@@ -316,6 +316,11 @@ def build_redirects():
         '/contact.html  /contact  301',
         '/terms.html  /terms  301',
         '/privacy.html  /privacy  301',
+        '',
+        '# Auth pages',
+        '/login.html  /login  301',
+        '/signup.html  /signup  301',
+        '/dashboard.html  /dashboard  301',
         '',
         '# Legacy process page',
         '/process.html  /guide  301',

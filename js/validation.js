@@ -13,6 +13,22 @@ function isValidBitcoinAddress(address) {
   return BTC_LEGACY_REGEX.test(trimmed) || BTC_BECH32_REGEX.test(trimmed);
 }
 
+function isValidUrl(value) {
+  try {
+    const url = new URL(String(value).trim());
+    return url.protocol === 'http:' || url.protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
+function isValidCodeOrLink(value) {
+  const trimmed = String(value).trim();
+  if (!trimmed) return false;
+  if (/^https?:\/\//i.test(trimmed)) return isValidUrl(trimmed);
+  return trimmed.length >= 4;
+}
+
 function setupEmailValidation(inputEl, errorMessage = 'Please enter valid email') {
   const wrapper = inputEl.closest('.field-wrapper') || createFieldWrapper(inputEl);
   let errorEl = wrapper.querySelector('.field-error');
@@ -185,6 +201,28 @@ function validateFormFields(formEl) {
         valid = false;
       } else if (!isValidBitcoinAddress(value)) {
         setFieldError(input, input.dataset.errorMessage || 'Please enter a valid Bitcoin address');
+        valid = false;
+      } else {
+        clearFieldError(input);
+      }
+    } else if (type === 'url') {
+      const value = input.value.trim();
+      if (!value) {
+        setFieldError(input, 'Please paste the full gift link');
+        valid = false;
+      } else if (!isValidUrl(value)) {
+        setFieldError(input, input.dataset.errorMessage || 'Please enter a valid gift link (https://...)');
+        valid = false;
+      } else {
+        clearFieldError(input);
+      }
+    } else if (type === 'codeOrLink') {
+      const value = input.value.trim();
+      if (!value) {
+        setFieldError(input, 'Please enter a gift card code or redemption link');
+        valid = false;
+      } else if (!isValidCodeOrLink(value)) {
+        setFieldError(input, input.dataset.errorMessage || 'Please enter a valid code or redemption link');
         valid = false;
       } else {
         clearFieldError(input);

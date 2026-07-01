@@ -17,6 +17,11 @@
 /terms.html  /terms  301
 /privacy.html  /privacy  301
 
+# Auth pages
+/login.html  /login  301
+/signup.html  /signup  301
+/dashboard.html  /dashboard  301
+
 # Legacy process page
 /process.html  /guide  301
 
