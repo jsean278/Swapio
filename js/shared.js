@@ -3,9 +3,9 @@
 const SWAPIO = {
   siteName: 'Swapio',
   siteUrl: 'https://swapio.cc',
-  logoPath: '/assets/logo.png',
+  logoPath: '/assets/logo-180.png',
   ogImagePath: '/assets/logo-512.png',
-  faviconPath: '/assets/logo-32.png',
+  faviconPath: '/assets/logo-180.png',
   appleTouchIconPath: '/assets/logo-180.png',
   supportEmail: 'support@swapio.cc',
 
@@ -291,23 +291,6 @@ function isValidSwapSession(saved) {
   }
 
   return true;
-}
-
-function getSiteLogoHtml({ size = 'hero', link = true } = {}) {
-  const sizeClass = size === 'header' ? 'site-logo' : 'swapio-logo';
-  const img = `<img src="${SWAPIO.appleTouchIconPath}" alt="${SWAPIO.siteName}" class="${sizeClass}" width="${size === 'header' ? 40 : 64}" height="${size === 'header' ? 40 : 64}">`;
-  if (!link) return img;
-  return `<a href="/" class="site-brand" aria-label="${SWAPIO.siteName} home">${img}</a>`;
-}
-
-function injectPageLogos() {
-  document.querySelectorAll('.page-hero > div').forEach((container) => {
-    if (container.querySelector('.swapio-logo, .hero-logo-wrap')) return;
-    const wrap = document.createElement('div');
-    wrap.className = 'hero-logo-wrap';
-    wrap.innerHTML = getSiteLogoHtml();
-    container.insertBefore(wrap, container.firstChild);
-  });
 }
 
 function getHeader(activePage = '') {
@@ -764,7 +747,6 @@ function initLayout(activePage = '') {
   const footerEl = document.getElementById('site-footer');
   if (headerEl) headerEl.innerHTML = getHeader(activePage);
   if (footerEl) footerEl.innerHTML = getFooter();
-  injectPageLogos();
   initSeo();
   initMobileMenu();
   initHeaderScroll();

@@ -176,9 +176,8 @@ def build_article_page(slug, article):
   <meta name="twitter:title" content="{esc(title)}">
   <meta name="twitter:description" content="{esc(description)}">
   <meta name="twitter:image" content="{SITE}/assets/logo-512.png">
-  <link rel="icon" href="/assets/logo-32.png" type="image/png" sizes="32x32">
-  <link rel="icon" href="/assets/logo-180.png" type="image/png" sizes="180x180">
-  <link rel="apple-touch-icon" href="/assets/logo-180.png" sizes="180x180">
+  <link rel="icon" href="/assets/logo-180.png" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/logo-180.png">
   <title>{esc(title)}</title>
   <script type="application/ld+json">{json.dumps(article_schema)}</script>
   <script id="swapio-org-schema" type="application/ld+json">{json.dumps(org_schema)}</script>
